@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>User CRUD</title>
+
+<link rel="stylesheet" type="text/css" href="./app/spas/users/styles/bootstrap.css">
+
+<script type="text/javascript" src="./app/spas/users/js/angular.js"></script>
+<script type="text/javascript" src="./app/spas/users/js/angular-route.js"></script>>
+
+<script type="text/javascript" src="./app/spas/users/js/plt-config.js"></script>
+<script type="text/javascript" src="./app/spas/users/user-module.js"></script>
+<script type="text/javascript" src="./app/spas/users/user-routes.js"></script>
+<script type="text/javascript" src="./app/spas/users/user-componente-controller.js"></script>
+<script type="text/javascript" src="./app/spas/users/user-controller.js"></script>
+<script type="text/javascript" src="./app/spas/users/user-service-estatico.js"></script>
+<script>
+     PltConfig.init({
+            name: 'app',
+            staticPath: '/project1',
+            APIPath: '/project1/api',
+           
+            regularFiles: [
+                'app/spas/users/user-controller.js',
+                'app/spas/users/user-componente-controller.js',
+                'app/spas/users/user-service-estatico.js',
+                'app/spas/users/user-routes.js',
+                'app/spas/users/styles/bootstrap.css'
+             
+            ],
+            minifiedFiles: [
+                'app/scripts/controller/user-controller.min.js',
+                'app/spas/users/user-componente-controller.min.js',
+                'app/spas/users/user-service-estatico.min.js',
+                'app/spas/users/user-routes.min.js',
+                'app/styles/bootstrap.min.css'         
+            ],
+
+            dependencies: {
+                'plt-base': '^1.0.0',
+                'angular-route': '^1.5.0',
+                'gaw-chip': '^1.0.0',
+                'gaw-position': '^1.0.0',
+                'gaw-dropdown': '^1.0.0'
+            }
+        });
+</script>
+<style>
+    a {
+        cursor: pointer;
+        background-color: lightblue;
+    }
+</style>
+
+<style>
+    /*
+     * Evita a exibição da marcação do angular antes do boot do angular
+     */
+
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+        display: none !important;
+    }
+
+</style>
+
+</head>
+
+<body>
+      
+    <ng-view>
+    </ng-view>
+       
+</body>
+
+</html>
