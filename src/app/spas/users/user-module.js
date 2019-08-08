@@ -5,7 +5,8 @@
     angular
         .module('app', [
             'ngRoute',
-            'UserCRUDServiceEstatico',          
+            'UserCRUDServiceEstatico',  
+            'bb.dropdown', 
         ]);
        
 })(angular);

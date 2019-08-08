@@ -21,6 +21,7 @@ module.exports = function (grunt) {
                       // inject a custom middleware
                       middlewares.unshift(function (req, res, next) {
                           res.setHeader('Access-Control-Allow-Origin', '*');
+                          res.setHeader('Access-Control-Allow-Credentials', true);
                           res.setHeader('Access-Control-Allow-Methods', '*');
                           //a console.log('foo') here is helpful to see if it runs
                           return next();
@@ -112,7 +113,21 @@ module.exports = function (grunt) {
               }
           }
       },
+      // configure nodemon
+      /* 
+      nodemon: {
+            dev: {
+                script: '/src/app/spas/users/js/server.js'
+            }
+      }
+      */
   });
+
+  //load nodemon
+  //grunt.loadNpmTasks('grunt-nodemon');
+
+  //register the nodemon task when we run grunt
+  //grunt.registerTask('default', ['nodemon']);
 
   // load the tasks
   grunt.loadNpmTasks('grunt-contrib-clean');

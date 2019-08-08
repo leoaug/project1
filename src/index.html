@@ -1,59 +1,46 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 
-<title>User CRUD</title>
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:8300">
+
+<title>Project 1 Plataforma BB 3.0</title>
+
+<base href="/">
+<script type="text/javascript" src="./app/spas/users/js/jquery.js"></script>
 
 <link rel="stylesheet" type="text/css" href="./app/spas/users/styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./app/spas/users/styles/roboto.css">
+<link rel="stylesheet" type="text/css" href="./app/spas/users/styles/components.gaw.60bafcc3.css">
+<link rel="stylesheet" type="text/css" href="./app/spas/users/styles/docs.36347776.css">
+<link rel="stylesheet" type="text/css" href="./app/spas/users/styles/dropdown.css">
 
-<script type="text/javascript" src="./app/spas/users/js/angular.js"></script>
-<script type="text/javascript" src="./app/spas/users/js/angular-route.js"></script>>
+
 
 <script type="text/javascript" src="./app/spas/users/js/plt-config.js"></script>
+<script type="text/javascript" src="./app/spas/users/js/angular.js"></script>
+<script type="text/javascript" src="./app/spas/users/js/angular-route.js"></script>>
+<script type="text/javascript" src="./app/spas/users/js/angular-sanitize.js"></script>
 <script type="text/javascript" src="./app/spas/users/user-module.js"></script>
 <script type="text/javascript" src="./app/spas/users/user-routes.js"></script>
 <script type="text/javascript" src="./app/spas/users/user-componente-controller.js"></script>
 <script type="text/javascript" src="./app/spas/users/user-controller.js"></script>
 <script type="text/javascript" src="./app/spas/users/user-service-estatico.js"></script>
-<script>
-     PltConfig.init({
-            name: 'app',
-            staticPath: '/project1',
-            APIPath: '/project1/api',
-           
-            regularFiles: [
-                'app/spas/users/user-controller.js',
-                'app/spas/users/user-componente-controller.js',
-                'app/spas/users/user-service-estatico.js',
-                'app/spas/users/user-routes.js',
-                'app/spas/users/styles/bootstrap.css'
-             
-            ],
-            minifiedFiles: [
-                'app/scripts/controller/user-controller.min.js',
-                'app/spas/users/user-componente-controller.min.js',
-                'app/spas/users/user-service-estatico.min.js',
-                'app/spas/users/user-routes.min.js',
-                'app/styles/bootstrap.min.css'         
-            ],
+<script type="text/javascript" src="./app/spas/users/js/dropdown.js"></script>
 
-            dependencies: {
-                'plt-base': '^1.0.0',
-                'angular-route': '^1.5.0',
-                'gaw-chip': '^1.0.0',
-                'gaw-position': '^1.0.0',
-                'gaw-dropdown': '^1.0.0'
-            }
-        });
-</script>
-<style>
-    a {
-        cursor: pointer;
-        background-color: lightblue;
-    }
-</style>
+<script type="text/javascript" src="./app/spas/users/js/components.d1ca05dd.js"></script>
+<script type="text/javascript" src="./app/spas/users/js/docs.7fa6cda8.js"></script>
 
+
+
+<!-- 
+<script type="text/javascript" src="./app/spas/users/js/require.js"></script>
+
+<script type="text/javascript" src="./app/spas/users/js/express.js"></script>
+
+<script type="text/javascript" src="./app/spas/users/js/server.js" ></script>
+-->
 <style>
     /*
      * Evita a exibição da marcação do angular antes do boot do angular
@@ -69,14 +56,58 @@
     }
 
 </style>
+<script>
+    PltConfig.init({
+           name: 'app',
+           staticPath: '/project1',
+           APIPath: '/project1/api',
+          
+           regularFiles: [
+               'app/spas/users/user-controller.js',
+               'app/spas/users/user-componente-controller.js',
+               'app/spas/users/user-service-estatico.js',
+               'app/spas/users/user-routes.js',
+               'app/spas/users/styles/bootstrap.css'
+            
+           ],
+           minifiedFiles: [
+               'app/scripts/controller/user-controller.min.js',
+               'app/spas/users/user-componente-controller.min.js',
+               'app/spas/users/user-service-estatico.min.js',
+               'app/spas/users/user-routes.min.js',
+               'app/styles/bootstrap.min.css'         
+           ],
+           dependencies: {
+               'plt-base': '^1.0.0',
+               'angular-route': '^1.5.0',
+               'gaw-chip': '^1.0.0',
+               'gaw-position': '^1.0.0',
+               'gaw-dropdown': '^1.0.0'
+           }
+       });
+</script>
+
+<script>
+
+    angular.module('demo', [ 'bb.dropdown' ]);
+
+</script>
+
+<style>
+    a {
+        cursor: pointer !important;
+        background-color: lightblue;
+    }
+</style>
+
 
 </head>
 
-<body>
-      
-    <ng-view>
-    </ng-view>
-       
+<body class="ng-cloak">
+    <data-plt-template-base> 
+        <ng-view>
+        </ng-view>
+    </data-plt-template-base>  
 </body>
 
 </html>
