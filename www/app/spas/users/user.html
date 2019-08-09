@@ -1,10 +1,23 @@
+<!--  combo pai-->
 <div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)">
     <a href id="simple-dropdown" bb-dropdown-toggle>
-        Clique aqui para ver um dropdown!
+        Clique aqui para ver um dropdown do Item
     </a>
-    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
-        <li role="menuitem" ng-repeat="choice in vm.items">
-            <a href>{{choice}}</a>
+    <ul bb-dropdown-menu aria-labelledby="simple-dropdown" >
+        <li role="menuitem" ng-repeat="item in vm.items" >
+            <a ng-click="vm.getItem(item)">{{ item.nome }}</a>
+        </li>
+    </ul>
+</div>
+
+<!--  combo filha-->
+<div bb-dropdown bb-no-arrow="true">
+    <a href id="simple-dropdown" bb-dropdown-toggle>
+        Clique aqui para ver um dropdown do subItem
+    </a>
+    <ul bb-dropdown-menu aria-labelledby="simple-dropdown" >
+        <li role="menuitem" ng-repeat="subItem in vm.item.subItem" >
+            <a>{{ subItem.nome }}</a>
         </li>
     </ul>
 </div>

@@ -2,18 +2,21 @@ var app = angular.module('UserCRUDServiceEstatico', [])
 
 app.service('UserCRUDServiceEstatico',['$http', function ($http) {
 
-    this.editarUser = function editarUser(user,vm,index) {
+    this.editarUser = function editarUser(userTela,vm,index) {
         
         //altera o campo preEditar do user para true para que apareça o input text dentro da tabela
-        user.preEditar = true;
+        userTela.preEditar = true;
 
         //salva o user com o campo preEditar = true
-        vm.users[index] = user;
+        vm.users[index] = userTela;
 
-        //guarda uma cópia do user para que quando cancelar a edição, volte com os valores originais
+        //guarda uma cópia do user, criando o objeto 
+        //userOriginal userOriginal new userOriginal()  
+        //userOriginal =  vm.users[index]
+        //em tempo de compilacao) para que quando cancelar a edição, volte com os valores originais
         vm.userOriginal = angular.copy(vm.users[index]);
 
-        //limpa o formulario
+        //limpa o formulario (setUSer(new User()))
         vm.user = {};
 
         return user; 

@@ -10,15 +10,55 @@
 
         var vm = this;
 
+        // recomendacoes do angular pra declarar funcoes (metodos) da Controller
+        vm.getItem = getItem;
+        vm.toggled = toggled;
+
         vm.items = [
-            'A primeira escolha!',
-            'Mais uma escolha para você.',
-            'Mas espere! Uma terceira!'
+            { 
+                id : 1, 
+                nome : "A primeira escolha!",
+                subItem : [
+                    {
+                        id : 1, nome :"SubItem 1 A primeira escolha!"
+                    },
+                    {
+                        id : 2, nome :"SubItem 2 A primeira escolha!"
+                    }
+                    
+                ]
+            },
+            { 
+                id : 2, 
+                nome : "Mais uma escolha para você.",
+                subItem : [
+                    {
+                        id : 1, nome :"SubItem 1 Mais uma escolha para você."
+                    },
+                    {
+                        id : 2, nome :"SubItem 2 Mais uma escolha para você."
+                    }
+                    
+                ]
+            },
+            { 
+                id : 3, 
+                nome : 'Mas espere! Uma terceira!'
+            }            
         ];
     
-        vm.toggled = function(open) {
-            console.log('Dropdown is now: ', open);
-        };
+
+        function toggled(open) {
+            //console.log('Dropdown is now: ', open);
+        }
+        function getItem(itemTela){
+            // Item item = new Item()
+            // item = item
+            vm.item = angular.copy(itemTela);
+            console.log(vm.item);
+            // imprimit objeto com o alert
+            //alert(itemTela.toSource().nome);
+        }
 
     }
 })(angular);
