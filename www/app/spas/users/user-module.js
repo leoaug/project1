@@ -7,6 +7,8 @@
             'ngRoute',
             'UserCRUDServiceEstatico',  
             'bb.dropdown', 
+            'bb.chip',
+            'bb.table',
         ]);
        
 })(angular);

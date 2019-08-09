@@ -9,8 +9,8 @@
     function routes($routeProvider, $locationProvider) {
         
          // use the HTML5 History API
-         $locationProvider.html5Mode(true);
-         $locationProvider.hashPrefix('');
+         //$locationProvider.html5Mode(true);
+         //$locationProvider.hashPrefix('');
         
         $routeProvider
             .when('/', {
