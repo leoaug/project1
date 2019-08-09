@@ -45,15 +45,18 @@ app.service('UserCRUDServiceEstatico',['$http', function ($http) {
     }
 
     this.adicionarUser = function adicionarUser(userTela,vm){
-        if (userTela!= null && userTela.name) {    
+             
+        if (userTela != null && userTela.name) {    
             console.log(vm.users.includes(userTela, 0));
 
             userTela.preEditar = false; 
             vm.users.push(userTela);
-            vm.user = {};          
+            vm.user = {};   
+            vm.errorMessage = '';       
         } else {
-            vm.errorMessage = 'Please enter a name!';
+            vm.errorMessage = 'Entre com o nome!';
             vm.message = '';
+            console.log(vm.errorMessage);
         }
     }
 

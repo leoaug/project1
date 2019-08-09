@@ -23,8 +23,21 @@
     </div>	
 
     <br /> 
-    <p style="color: green">{{message}}</p>
-    <p style="color: red">{{errorMessage}}</p>
+    
+    <div role="alert" aria-live="assertive" aria-atomic="true">
+        <bb-alert bb-type="success" ng-show="vm.message != ''">
+            <bb-alert-content>
+                <p> {{vm.message}}</p>
+            </bb-alert-content>
+        </bb-alert>
+
+
+        <bb-alert bb-type="error" ng-show="vm.errorMessage != ''">
+            <bb-alert-content>
+                <p>{{vm.errorMessage}}</p>
+            </bb-alert-content>            
+        </bb-alert>
+    </div>
 
 
 <br />

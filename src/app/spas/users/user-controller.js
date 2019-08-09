@@ -12,15 +12,26 @@ function UserCRUDCtrl($scope,UserCRUDServiceEstatico) {
     var vm = this;
 
     vm.users = [];
-    vm.listaChats = [
-        {
-            siglaNuvem: "sigla nuvem",
-            nome: "corpo.nome",
-            letters: "letters",
-            chat: undefined,
-            idformulario: 1
-        }
-    ];
+    vm.errorMessage = "";
+    vm.message = "";
+    vm.alerts = [{
+        type: 'success',
+        icon: 'mi mi--check-circle', // colocar clase do ícone referente a biblioteca de ícones do canal
+        text: 'Muito bem! Você leu com êxito esta mensagem de alerta importante.'
+    }, {
+        type: 'info',
+        icon: 'mi mi--info', // colocar clase do ícone referente a biblioteca de ícones do canal
+        text: 'Ótimo! Tudo está indo muito bem.'
+    }, {
+        type: 'warn',
+        icon: 'mi mi--warning', // colocar clase do ícone referente a biblioteca de ícones do canal
+        text: 'Aviso! Melhor verificar se está tudo bem.'
+    }, {
+        type: 'error',
+        icon: 'mi mi--close', // colocar clase do ícone referente a biblioteca de ícones do canal
+        text: 'Ah não! Mude algumas coisas e tente enviar novamente.'
+    }];
+
     
 
     vm.getLastMessageTime = function (item) {

@@ -9,6 +9,7 @@
             'bb.dropdown', 
             'bb.chip',
             'bb.table',
+            'bb.alert',
         ]);
        
 })(angular);
