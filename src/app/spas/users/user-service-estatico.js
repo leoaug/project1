@@ -19,7 +19,7 @@ app.service('UserCRUDServiceEstatico',['$http', function ($http) {
         //limpa o formulario (setUSer(new User()))
         vm.user = {};
 
-        return user; 
+        return userTela; 
     }
 
     this.confirmarEditar = function confirmarEditar(user,vm,index){
