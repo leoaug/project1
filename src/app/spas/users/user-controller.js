@@ -4,10 +4,10 @@
 
 angular.module('app').controller('UserCRUDCtrl', UserCRUDCtrl);
 
-UserCRUDCtrl.$inject = ['$scope','UserCRUDServiceEstatico'];
+UserCRUDCtrl.$inject = ['$scope','UserCRUDServiceEstatico','UserCRUDService'];
 
 
-function UserCRUDCtrl($scope,UserCRUDServiceEstatico) {
+function UserCRUDCtrl($scope,UserCRUDServiceEstatico,UserCRUDService) {
     
     var vm = this;
 
@@ -39,7 +39,7 @@ function UserCRUDCtrl($scope,UserCRUDServiceEstatico) {
     }
 
     vm.editarUser = function (user,index) {
-       
+    	
         UserCRUDServiceEstatico.editarUser(user,vm,index);
  
         /*

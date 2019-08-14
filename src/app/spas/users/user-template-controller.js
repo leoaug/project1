@@ -2,18 +2,29 @@
     'use strict';
 
     angular.module('app')
-        .controller('UserComponenteCtrl', UserComponenteCtrl);
+        .controller('UserTemplateCtrl', UserTemplateCtrl);
 
-    UserComponenteCtrl.$inject = ['$rootScope', '$scope'];
+    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$http','UserCRUDService'];
 
-    function UserComponenteCtrl($rootScope, $scope ) {
+    function UserTemplateCtrl($rootScope, $scope ,$http,UserCRUDService) {
 
         var vm = this;
 
+        //chamada rest de API (GET) ao iniciar a pagina
+        vm.tarefas = UserCRUDService.getTarefas().then(
+			function success(response){
+				vm.tarefas = angular.copy(response.data);
+				console.log(response.data);
+			},
+			function error(response) {
+				console.log("Erro causa: " +response.data);
+			}
+        );
+        
         // recomendacoes do angular pra declarar funcoes (metodos) da Controller
         vm.getItem = getItem;
         vm.toggled = toggled;
-
+        
         vm.items = [
             { 
                 id : 1, 
@@ -23,7 +34,10 @@
                         id : 1, nome :"SubItem 1 A primeira escolha!"
                     },
                     {
-                        id : 2, nome :"SubItem 2 A primeira escolha!"
+                        id : 2, nome :"SubItem 2 A primeira escolha!" 
+                    },
+                    {
+                    	id: 3, nome: "aeee eleeee"
                     }
                     
                 ]
@@ -37,13 +51,21 @@
                     },
                     {
                         id : 2, nome :"SubItem 2 Mais uma escolha para você."
+                    },
+                    {
+                        id : 3, nome :"SubItem 3 Mais uma escolha para você."
                     }
                     
                 ]
             },
             { 
                 id : 3, 
-                nome : 'Mas espere! Uma terceira!'
+                nome : 'Mas espere! Uma terceira!',
+                subItem : [
+                	{
+                		id : 1 , nome : "subitem da terceira opcao"
+                	}
+                ]
             }            
         ];
     

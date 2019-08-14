@@ -14,8 +14,8 @@
         
         $routeProvider
             .when('/', {
-                templateUrl: '/app/spas/users/user.html',
-                controller: 'UserComponenteCtrl',
+                templateUrl: '/app/spas/users/user-template.html',
+                controller: 'UserTemplateCtrl',
                 controllerAs: 'vm'
             })
             .when('/cadastro',{

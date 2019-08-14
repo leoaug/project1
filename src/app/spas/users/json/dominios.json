@@ -1,1 +1,88 @@
-{"status":"OK","messages":[],"data":{"localhost":[{"estatico":"localhost.estatico.bb.com.br","dinamico":"localhost.bb.com.br","mqtt":"wss://172.17.170.116:1883/"},{"estatico":"localhost.estatico.bb.com.br","dinamico":"localhost-cabb.bb.com.br"},{"estatico":"localhost.estatico.bb.com.br","dinamico":"localhost-publico-externo.bb.com.br"},{"estatico":"localhost-extranet.estatico.bb.com.br","dinamico":"localhost-extranet.bb.com.br"},{"estatico":"localhost.estatico.bb.com.br","dinamico":"localhost.desenv.bb.com.br","mqtt":"wss://172.17.170.116:1883/"}],"desenvolvimento":[{"estatico":"desenv.estatico.bb.com.br","dinamico":"plataforma.desenv.bb.com.br","mqtt":"wss://172.17.170.116:1883/"},{"estatico":"desenv.estatico.bb.com.br","dinamico":"plataforma-cabb.desenv.bb.com.br"},{"estatico":"desenv.estatico.bb.com.br","dinamico":"plataforma-publico-externo.desenv.bb.com.br"}],"homologacao":[{"estatico":"hm.estatico.bb.com.br","dinamico":"plataforma.hm.bb.com.br"},{"estatico":"hm.estatico.bb.com.br","dinamico":"plataforma-cabb.hm.bb.com.br"},{"estatico":"hm.estatico.bb.com.br","dinamico":"plataforma-publico-externo.hm.bb.com.br"}],"piloto":[{"estatico":"piloto.estatico.bb.com.br:49286","dinamico":"plataforma-piloto.atendimento.bb.com.br"},{"estatico":"piloto.estatico.bb.com.br:49286","dinamico":"plataforma-cabb-piloto.atendimento.bb.com.br"}],"producao":[{"estatico":"estatico.bb.com.br:49286","dinamico":"plataforma.atendimento.bb.com.br"},{"estatico":"estatico.bb.com.br:49286","dinamico":"plataforma-cabb.intranet.bb.com.br"},{"estatico":"estatico.bb.com.br:49286","dinamico":"plataforma-publico-externo.bb.com.br"},{"estatico":"estatico.extranet.bb.com.br","dinamico":"plataforma.extranet.bb.com.br"}]},"statusCode":200}
+{
+	"status": "OK",
+	"messages": [],
+	"data": {
+		"localhost": [
+			{
+				"estatico": "localhost.estatico.bb.com.br",
+				"dinamico": "localhost.bb.com.br",
+				"mqtt": "wss://172.17.170.116:1883/"
+			},
+			{
+				"estatico": "localhost.estatico.bb.com.br",
+				"dinamico": "localhost-cabb.bb.com.br"
+			},
+			{
+				"estatico": "localhost.estatico.bb.com.br",
+				"dinamico": "localhost-publico-externo.bb.com.br"
+			},
+			{
+				"estatico": "localhost-extranet.estatico.bb.com.br",
+				"dinamico": "localhost-extranet.bb.com.br"
+			},
+			{
+				"estatico": "localhost.estatico.bb.com.br",
+				"dinamico": "localhost.desenv.bb.com.br",
+				"mqtt": "wss://172.17.170.116:1883/"
+			}
+		],
+		"desenvolvimento": [
+			{
+				"estatico": "desenv.estatico.bb.com.br",
+				"dinamico": "plataforma.desenv.bb.com.br",
+				"mqtt": "wss://172.17.170.116:1883/"
+			},
+			{
+				"estatico": "desenv.estatico.bb.com.br",
+				"dinamico": "plataforma-cabb.desenv.bb.com.br"
+			},
+			{
+				"estatico": "desenv.estatico.bb.com.br",
+				"dinamico": "plataforma-publico-externo.desenv.bb.com.br"
+			}
+		],
+		"homologacao": [
+			{
+				"estatico": "hm.estatico.bb.com.br",
+				"dinamico": "plataforma.hm.bb.com.br"
+			},
+			{
+				"estatico": "hm.estatico.bb.com.br",
+				"dinamico": "plataforma-cabb.hm.bb.com.br"
+			},
+			{
+				"estatico": "hm.estatico.bb.com.br",
+				"dinamico": "plataforma-publico-externo.hm.bb.com.br"
+			}
+		],
+		"piloto": [
+			{
+				"estatico": "piloto.estatico.bb.com.br:49286",
+				"dinamico": "plataforma-piloto.atendimento.bb.com.br"
+			},
+			{
+				"estatico": "piloto.estatico.bb.com.br:49286",
+				"dinamico": "plataforma-cabb-piloto.atendimento.bb.com.br"
+			}
+		],
+		"producao": [
+			{
+				"estatico": "estatico.bb.com.br:49286",
+				"dinamico": "plataforma.atendimento.bb.com.br"
+			},
+			{
+				"estatico": "estatico.bb.com.br:49286",
+				"dinamico": "plataforma-cabb.intranet.bb.com.br"
+			},
+			{
+				"estatico": "estatico.bb.com.br:49286",
+				"dinamico": "plataforma-publico-externo.bb.com.br"
+			},
+			{
+				"estatico": "estatico.extranet.bb.com.br",
+				"dinamico": "plataforma.extranet.bb.com.br"
+			}
+		]
+	},
+	"statusCode": 200
+}

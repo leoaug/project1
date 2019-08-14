@@ -40,5 +40,12 @@ UserCRUDService.service('UserCRUDService',['$http', function ($http) {
           url: 'users'
         });
     }
+    
+    this.getTarefas = function getTarefas(){
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/listatarefas/rest/tarefa/listarTarefas'
+        });
+    }
 
 }]);

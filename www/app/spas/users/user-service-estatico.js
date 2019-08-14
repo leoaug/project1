@@ -52,7 +52,7 @@ app.service('UserCRUDServiceEstatico',['$http', function ($http) {
             userTela.preEditar = false; 
             vm.users.push(userTela);
             vm.user = {};   
-            vm.errorMessage = '';       
+            vm.errorMessage = '';      
         } else {
             vm.errorMessage = 'Entre com o nome!';
             vm.message = '';

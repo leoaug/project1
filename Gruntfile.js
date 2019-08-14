@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                       // inject a custom middleware
                       middlewares.unshift(function (req, res, next) {
                           res.setHeader('Access-Control-Allow-Origin', '*');
-                          res.setHeader('Access-Control-Allow-Credentials', true);
+                          //res.setHeader('Access-Control-Allow-Credentials', true);
                           res.setHeader('Access-Control-Allow-Methods', '*');
                           //a console.log('foo') here is helpful to see if it runs
                           return next();
