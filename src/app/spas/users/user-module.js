@@ -7,6 +7,7 @@
             'ngRoute',
             'UserCRUDServiceEstatico', 
             'UserCRUDService',
+            'TarefaService',
             'bb.dropdown', 
             'bb.chip',
             'bb.table',

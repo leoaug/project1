@@ -19,8 +19,8 @@
                 controllerAs: 'vm'
             })
             .when('/cadastro',{
-                templateUrl: '/app/spas/users/user-cadastro.html',
-                controller: 'UserCRUDCtrl',
+                templateUrl: '/app/spas/users/cadastro/usuario-cadastro.html',
+                controller: 'UsuarioCadastroCtrl',
                 controllerAs: 'vm'
             })
             .otherwise({

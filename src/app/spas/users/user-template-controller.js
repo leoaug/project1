@@ -4,23 +4,12 @@
     angular.module('app')
         .controller('UserTemplateCtrl', UserTemplateCtrl);
 
-    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$http','UserCRUDService'];
+    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$http','UserCRUDService','TarefaService'];
 
-    function UserTemplateCtrl($rootScope, $scope ,$http,UserCRUDService) {
+    function UserTemplateCtrl($rootScope, $scope ,$http,UserCRUDService,TarefaService) {
 
         var vm = this;
 
-        //chamada rest de API (GET) ao iniciar a pagina
-        vm.tarefas = UserCRUDService.getTarefas().then(
-			function success(response){
-				vm.tarefas = angular.copy(response.data);
-				console.log(response.data);
-			},
-			function error(response) {
-				console.log("Erro causa: " +response.data);
-			}
-        );
-        
         // recomendacoes do angular pra declarar funcoes (metodos) da Controller
         vm.getItem = getItem;
         vm.toggled = toggled;

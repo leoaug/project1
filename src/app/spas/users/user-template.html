@@ -26,18 +26,3 @@
     </ul>
 </div>
 
-<br/>
-<br/>
-
-<!-- Combo da chamada REST -->
-<div bb-dropdown bb-no-arrow="true">
-    <a href id="simple-dropdown" bb-dropdown-toggle>
-        Combo Chamada REST (Tarefas)
-    </a>
-    <ul bb-dropdown-menu aria-labelledby="simple-dropdown" >
-        <li role="menuitem" ng-repeat="tarefa in vm.tarefas" >
-            <a style="text-decoration:none">Tarefa : {{ tarefa.nome }} - Usuário : {{ tarefa.usuario.nome }}</a>
-        </li>
-    </ul>
-</div>
-
