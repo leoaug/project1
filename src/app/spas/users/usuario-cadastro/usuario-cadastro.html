@@ -87,10 +87,10 @@
             </div>    
         </td>
         <td>
-            <a ng-if="usuario.preEditar == false" ng-click="vm.editarUser(usuario,$index)">Editar</a>  
+            <a ng-if="usuario.preEditar == false" ng-click="vm.editarUsuario(usuario,$index)">Editar</a>  
             <a ng-if="usuario.preEditar == true" ng-click="vm.confirmarEditar(usuario,$index)">Confirmar</a>  
             <a ng-if="usuario.preEditar == true" ng-click="vm.cancelarEditarUser(usuario,$index)"> Cancelar</a>  
-            <a ng-if="usuario.preEditar == false" ng-click="vm.deleteUser($index)"> excluir</a>
+            <a ng-if="usuario.preEditar == false" ng-click="vm.excluirUsuario($index)"> excluir</a>
         </td>
     </tr>
 </table>
