@@ -39,9 +39,9 @@ function UsuarioCadastroCtrl($scope, UserCRUDServiceEstatico , UserCRUDService )
 			}
 			
 		}
-     ).finally(function () {
+    ).finally(function () {
     	 vm.carregando = false;
-     });
+    });
     
     
     

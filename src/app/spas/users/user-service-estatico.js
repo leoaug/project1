@@ -22,15 +22,42 @@ app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function 
         return usuarioTela; 
     }
 
-    this.confirmarEditar = function confirmarEditar(user,vm,index){
-        //altera o campo preEditar do user para false para que apareça readonly dos campos
-        user.preEditar = false;
-        
-        vm.usuarios[index] = user;
-        vm.usuarioOriginal = angular.copy(vm.usuarios[index]);
-        vm.user = {};
+    this.confirmarEditar = function confirmarEditar(usuarioTela,vm,index){
+    	
+    	//deletar esse atributo do usuario, pois ele não existe no backEnd e da erro 400
+    	delete usuarioTela.preEditar;   	
+    	
+    	$http({
+            method: 'PUT',            
+            headers: {
+            	'Content-Type': 'application/json'
+            },            
+            url: 'http://localhost:8080/listatarefas/rest/usuario/alterarUsuario',
+            data: JSON.parse(JSON.stringify(usuarioTela))
+        })          
+        .then(
+    		function success(response){
+		    	//altera o campo preEditar do user para false para que apareça readonly dos campos
+    			usuarioTela.preEditar = false;
+		        
+		        vm.usuarios[index] = usuarioTela;
+		        vm.usuarioOriginal = angular.copy(vm.usuarios[index]);
+		        vm.usuario = {}; 
+  	            vm.errorMessage = ''; 
+  			},
+  			function error(response) {
+  				if (response.status === 404){
+  					console.log("Endpoint Fora ");
+  				} else {
+  					vm.errorMessage = "Código do Status " +response.status;
+  					console.log("Código do Status " +response.status );
+  				}
+  				
+  			}
+       );
+    	
 
-        return user;
+        return usuarioTela;
     }
 
     this.cancelarEditarUser = function cancelarEditarUser(usuarioTela,vm,index) {
@@ -45,11 +72,9 @@ app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function 
     }
 
     this.adicionarUsuario = function adicionarUsuario(usuarioTela,vm){
-             
+          
         if (usuarioTela != null && usuarioTela.nome && usuarioTela.sexoUsuarioEnum) {    
-        	
-        	console.log(usuarioTela);
-        	
+        	        	
         	$http({
                 method: 'POST',
                 headers: {
@@ -57,26 +82,25 @@ app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function 
                 },
                 url: 'http://localhost:8080/listatarefas/rest/usuario/salvarUsuario',
                 data: JSON.stringify(usuarioTela)
-              })          
-              .then(
-        			function success(response){
-        				console.log(vm.usuarios.includes(usuarioTela, 0));
-
-        	            usuarioTela.preEditar = false; 
-        	            vm.usuarios.push(usuarioTela);
-        	            vm.usuario = {};   
-        	            vm.errorMessage = ''; 
-        			},
-        			function error(response) {
-        				if (response.status === 404){
-        					console.log("Endpoint Fora ");
-        				} else {
-        					vm.errorMessage = "Código do Status " +response.status;
-        					console.log("Código do Status " +response.status );
-        				}
-        				
-        			}
-            	);
+            })          
+            .then(
+    		    function success(response){
+    				
+    	            usuarioTela.preEditar = false; 
+    	            vm.usuarios.push(usuarioTela);
+    	            vm.usuario = {};   
+    	            vm.errorMessage = ''; 
+    			},
+    			function error(response) {
+    				if (response.status === 404){
+    					console.log("Endpoint Fora ");
+    				} else {
+    					vm.errorMessage = "Código do Status " +response.status;
+    					console.log("Código do Status " +response.status );
+    				}
+    				
+    			}
+            );
         	  
         } else {
             vm.errorMessage = 'Entre com o nome e o sexo!';
