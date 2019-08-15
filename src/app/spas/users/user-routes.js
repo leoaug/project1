@@ -19,7 +19,7 @@
                 controllerAs: 'vm'
             })
             .when('/cadastro',{
-                templateUrl: '/app/spas/users/cadastro/usuario-cadastro.html',
+                templateUrl: '/app/spas/users/usuario-cadastro/usuario-cadastro.html',
                 controller: 'UsuarioCadastroCtrl',
                 controllerAs: 'vm'
             })

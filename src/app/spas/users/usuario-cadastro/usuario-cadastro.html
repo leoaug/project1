@@ -1,4 +1,9 @@
 <div>
+    
+    <div ng-if="vm.carregando">
+    	Carregando página ...
+	</div>
+    
     <div class="container">    
         <table class="table table-bordered">
            
@@ -71,7 +76,7 @@
             <div ng-if="usuario.preEditar == true">
                	<div bb-dropdown bb-no-arrow="true">
 				    <a href id="simple-dropdown" bb-dropdown-toggle>
-				         {{ usuario.sexo.sexoUsuarioEnum }}
+				         {{ usuario.sexoUsuarioEnum }}
 				    </a>
 				    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
 				        <li role="menuitem" ng-repeat="sexo in vm.sexos" >
