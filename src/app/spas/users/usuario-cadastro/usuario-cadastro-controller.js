@@ -66,7 +66,7 @@ function UsuarioCadastroCtrl($scope, UserCRUDServiceEstatico , UserCRUDService )
     function setSexoUsuario(sexo,usuarioTela) {
 		
     	usuarioTela.sexoUsuarioEnum = angular.copy(sexo.sexoUsuarioEnum);
-    	      
+    	       
 	}
 
     function adicionarUsuario(usuario) {
