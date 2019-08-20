@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('UserTemplateCtrl', UserTemplateCtrl);
 
-    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$http','UserCRUDService','TarefaService'];
+    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$http','TarefaService'];
 
-    function UserTemplateCtrl($rootScope, $scope ,$http,UserCRUDService,TarefaService) {
+    function UserTemplateCtrl($rootScope, $scope ,$http,TarefaService) {
 
         var vm = this;
 

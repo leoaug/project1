@@ -4,10 +4,10 @@
 
 angular.module('app').controller('UsuarioCadastroCtrl', UsuarioCadastroCtrl);
 
-UsuarioCadastroCtrl.$inject = ['$scope','UserCRUDServiceEstatico','UserCRUDService'];
+UsuarioCadastroCtrl.$inject = ['$scope','UsuarioService'];
 
 
-function UsuarioCadastroCtrl($scope, UserCRUDServiceEstatico , UserCRUDService ) {
+function UsuarioCadastroCtrl($scope, UsuarioService ) {
     
     var vm = this;
 
@@ -22,28 +22,9 @@ function UsuarioCadastroCtrl($scope, UserCRUDServiceEstatico , UserCRUDService )
     vm.carregando = true;
     
 // ================= Carregando a table de usuários ===================   
-    UserCRUDServiceEstatico.getUsuarios().then(
-		function success(response){
-			vm.usuarios = angular.copy(response.data);
-			//aicionando um novoa tributo ao array de objetos do usuario
-			angular.forEach(vm.usuarios, function(usuario) {
-				usuario.preEditar = false;
-	        });
-		},
-		function error(response) {
-			if (response.status === 404 || response.status === -1){
-				vm.errorMessage = "Erro ao carregar a tabela de usuários, servidor fora do ar, status: " + response.status; 
-			} else {
-				vm.errorMessage = "Código do Status " +response.status;
-				console.log("Código do Status " +response.status );
-			}
-			
-		}
-    ).finally(function () {
-    	 vm.carregando = false;
-    });
     
- 
+    UsuarioService.getUsuarios(vm);
+    
 //=================== funcoes da controller ==========================================
     
     vm.setSexo = setSexo;
@@ -71,32 +52,34 @@ function UsuarioCadastroCtrl($scope, UserCRUDServiceEstatico , UserCRUDService )
 
     function adicionarUsuario(usuario) {
 	     
-    	UserCRUDServiceEstatico.adicionarUsuario(usuario,vm);
+    	UsuarioService.adicionarUsuario(usuario,vm);
 	      
 	}
  
 
     function editarUsuario(usuario,index) {
     	
-        UserCRUDServiceEstatico.editarUser(usuario,vm,index);
+        UsuarioService.editarUsuario(usuario,vm,index);
  
     }
 
     function confirmarEditar (usuario,index) {
        
-    	UserCRUDServiceEstatico.confirmarEditar(usuario,vm,index);
+    	UsuarioService.confirmarEditar(usuario,vm,index);
     
     }
 
     function cancelarEditarUsuario (usuario,index) {
       
-        UserCRUDServiceEstatico.cancelarEditarUsuario(usuario,vm,index);
+        UsuarioService.cancelarEditarUsuario(usuario,vm,index);
 
     }
     
 
     function excluirUsuario (index) {      
-        UserCRUDServiceEstatico.excluirUsuario(vm,index);  
+        
+    	UsuarioService.excluirUsuario(vm,index);  
+    
     }
    
 
@@ -112,25 +95,7 @@ function UsuarioCadastroCtrl($scope, UserCRUDServiceEstatico , UserCRUDService )
         return existe;
        
     };
-    
-    vm.getUser = function (id) {        
-        UserCRUDService.getUser(id)
-          .then(function success(response){
-              vm.user = response.data;
-              vm.user.id = id;
-              vm.message='';
-              vm.errorMessage = '';
-          },
-          function error (response ){
-              vm.message = '';
-              if (response.status === 404){
-                  vm.errorMessage = 'User not found!';
-              }
-              else {
-                  vm.errorMessage = "Error getting user!";
-              }
-          });
-    }
+   
     */
   
     

@@ -5,8 +5,7 @@
     angular
         .module('app', [
             'ngRoute',
-            'UserCRUDServiceEstatico', 
-            'UserCRUDService',
+            'UsuarioService', 
             'TarefaService',
             'bb.dropdown', 
             'bb.chip',

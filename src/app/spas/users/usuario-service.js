@@ -1,8 +1,8 @@
-var app = angular.module('UserCRUDServiceEstatico', [])
+var app = angular.module('UsuarioService', [])
 
-app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function ($http,$httpParamSerializer) {
+app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$httpParamSerializer) {
 
-    this.editarUser = function editarUser(usuarioTela,vm,index) {
+    this.editarUsuario = function editarUsuario(usuarioTela,vm,index) {
         
         //altera o campo preEditar do user para true para que apareça o input text dentro da tabela
         usuarioTela.preEditar = true;
@@ -87,11 +87,20 @@ app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function 
             .then(
     		    function success(response){
     				
-    	            usuarioTela.preEditar = false; 
-    	            vm.usuarios.push(usuarioTela);
+    		    	usuarioTela.preEditar = false; 
+    		    	
+    		    	usuarioTela.id = JSON.stringify(response.data.id);
+    	           
+    	            vm.usuarios.push(usuarioTela);   	           
+    	            
+    	            console.log(vm.usuarios);
+    	            
     	            vm.usuario = {}; 
+    	            
     	            vm.message = "Usuário cadastrado."
+    	            	
     	            vm.errorMessage = ''; 
+    	            
     			},
     			function error(response) {
     				if (response.status === 404){
@@ -111,15 +120,40 @@ app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function 
             console.log(vm.errorMessage);
         }
     }
-    this.getUsuarios = function getUsuarios(){
+    this.getUsuarios = function getUsuarios(vm){
         return $http({
           method: 'GET',
           url: 'http://localhost:8080/listatarefas/rest/usuario/listarUsuarios'
-        });
+        })
+        .then(
+			function success(response){
+				vm.usuarios = angular.copy(response.data);
+				//aicionando um novoa tributo ao array de objetos do usuario
+				angular.forEach(vm.usuarios, function(usuario) {
+					usuario.preEditar = false;
+		        });
+				
+				console.log(vm.usuarios);
+			},
+			function error(response) {
+				if (response.status === 404 || response.status === -1){
+					vm.errorMessage = "Erro ao carregar a tabela de usuários,"+response+", status: " + response.status; 
+				} else {
+					vm.errorMessage = "Código do Status " +response.status;
+					console.log("Código do Status " +response.status );
+				}
+				
+			}
+	    ).finally(function () {
+	    	 vm.carregando = false;
+	    });
+        
+        return vm.usuarios;
+       
     }
 
     this.excluirUsuario = function excluirUsuario(vm,index){
-    	console.log(vm.usuarios[index].id);
+    	
     	$http({
             method: 'DELETE',    
             headers: {
@@ -137,16 +171,15 @@ app.service('UserCRUDServiceEstatico',['$http','$httpParamSerializer', function 
 			},
 			function error(response) {
 				if (response.status === 404){
-					console.log("Endpoint Fora ");
+					console.log("Endpoint Fora "+ response.json());
 				} else {
 					vm.errorMessage = "Código do Status " +response.status;
 					console.log("Código do Status " +response.status );
 				}
-				vm.errorMessage = "Erro ao excluir o usuário, Código do Status " +response.status;
+				vm.errorMessage = "Erro ao excluir o usuário, causa: " + response.json() + " Código do Status " +response.status;
 			}
         );
-    	
-    	
+    
     	
     }
 }]);
