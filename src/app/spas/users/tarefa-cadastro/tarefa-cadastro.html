@@ -1,0 +1,77 @@
+<div>
+    
+    <div ng-if="vm.carregando">
+    	Carregando página ...
+	</div>
+	<div class="container">    
+        <table class="table table-bordered">
+           
+            <tr>
+                <td width="100">Nome:</td>
+                <td><input type="text" id="nome" ng-model="vm.tarefa.nome" /></td>
+            </tr>
+            <tr>
+            	<td width="100">Usuário:</td>
+            	<td>
+            		<div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)">
+					    <a href id="simple-dropdown" bb-dropdown-toggle>
+					        Selecione o Usuário:
+					    </a>
+					    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
+					        <li role="menuitem" ng-repeat="usuario in vm.usuarios" >
+					            <a style="text-decoration:none">{{ usuario.nome }}</a>
+					        </li>
+					    </ul>
+					</div>
+            	</td>
+            </tr>
+       </table>
+       
+       <br/>
+       
+       <table class="table table--hover table--striped">
+
+	    <tr>
+	        <th style="width:150px">Nome</th>
+	        <th style="width:150px">Usuário</th>
+	        <th style="width:150px">Data Início</th>
+	        <th style="width:150px">Data Fim</th>
+	        <th style="width:50px">Status</th>
+	        <th>Ação</th>
+	    </tr>
+	    <tr ng-repeat="tarefa in vm.tarefas">
+	    
+	    	<td>
+	    		<div ng-if="tarefa.preEditar == false">
+	    			{{ tarefa.nome }}
+	    		</div>
+	    		
+	    		<div ng-if="tarefa.preEditar == true">
+	    			<input type="text" id="id" ng-model="tarefa.nome" />
+	    		</div>
+	    	</td>
+	    
+	    	<td>
+	    		{{ tarefa.usuario.nome }}
+	    	</td>
+	    	
+	    	<td>
+	    		{{ tarefa.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
+	    	</td>
+	    	
+	    	<td>
+	    		{{ tarefa.dataFim | date: 'dd/MM/yyyy HH:mm' }}
+	    	</td>
+	    
+	    	<td>
+	    		{{ tarefa.statusTarefaEnum }}
+	    	</td>
+	    </tr>
+	       
+	       
+	       
+	</div>   
+ 
+	 
+	
+</div>
