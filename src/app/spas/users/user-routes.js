@@ -18,11 +18,16 @@
                 controller: 'UserTemplateCtrl',
                 controllerAs: 'vm'
             })
-            .when('/cadastro',{
+            .when('/cadastroUsuario',{
                 templateUrl: '/app/spas/users/usuario-cadastro/usuario-cadastro.html',
                 controller: 'UsuarioCadastroCtrl',
                 controllerAs: 'vm'
             })
+            .when('/cadastroTarefa',{
+        		templateUrl: "/app/spas/users/tarefa-cadastro/tarefa-cadastro.html",
+        		controller: 'TarefaCadastroCtrl',
+        		controllerAs: 'vm'
+        	})
             .otherwise({
                 redirectTo: '/'
             });

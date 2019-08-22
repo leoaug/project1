@@ -54,6 +54,9 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
   					console.log("Código do Status " +response.status );
   				}
   				
+  				vm.message = "";
+				vm.errorMessage = "Erro ao confirmar a edição do usuário, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
+  				
   			}
        );
     	
@@ -109,8 +112,8 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     					console.log("Código do Status " +response.status );
     				}
     				
-    				vm.errorMessage = "Erro ao cadastrar usuário, Código do Status " +response.status;
-    				
+    				vm.message = "";
+    				vm.errorMessage = "Erro ao adicionar o usuário, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
     			}
             );
         	  
@@ -137,18 +140,19 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
 			},
 			function error(response) {
 				if (response.status === 404 || response.status === -1){
-					vm.errorMessage = "Erro ao carregar a tabela de usuários,"+response+", status: " + response.status; 
+					vm.errorMessage = "Erro ao carregar a tabela de usuários , causa : " + response.data + ", status: " + response.status; 
 				} else {
 					vm.errorMessage = "Código do Status " +response.status;
 					console.log("Código do Status " +response.status );
 				}
-				
+				vm.message = "";
+				vm.errorMessage = "Erro ao carregar os usuários, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
 			}
 	    ).finally(function () {
 	    	 vm.carregando = false;
 	    });
         
-        return vm.usuarios;
+        //return vm.usuarios;
        
     }
 
@@ -167,16 +171,18 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         .then(
 		    function success(response){	
 		    	vm.usuarios.splice(index,1);
-		    	vm.message = "Usuário excluído."
+		    	vm.message = "Usuário excluído.";
+		    	vm.errorMessage = "";
 			},
 			function error(response) {
 				if (response.status === 404){
-					console.log("Endpoint Fora "+ response.json());
+					console.log("Endpoint Fora "+ response.data);
 				} else {
 					vm.errorMessage = "Código do Status " +response.status;
 					console.log("Código do Status " +response.status );
 				}
-				vm.errorMessage = "Erro ao excluir o usuário, causa: " + response.json() + " Código do Status " +response.status;
+				vm.message = "";
+				vm.errorMessage = "Erro ao excluir o usuário, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
 			}
         );
     

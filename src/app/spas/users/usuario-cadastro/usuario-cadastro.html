@@ -30,79 +30,80 @@
         </table>
         <br /> 
         <input type="button" ng-click="vm.adicionarUsuario(vm.usuario)" value="Adicionar Usuário" />
-    </div>	
+   
 
-    <br /> 
-    
-    <div role="alert" aria-live="assertive" aria-atomic="true">
-        <bb-alert bb-type="success" ng-show="vm.message != ''">
-            <bb-alert-content>
-                <p> {{vm.message}}</p>
-            </bb-alert-content>
-        </bb-alert>
-
-
-        <bb-alert bb-type="error" ng-show="vm.errorMessage != ''">
-            <bb-alert-content>
-                <p>{{vm.errorMessage}}</p>
-            </bb-alert-content>            
-        </bb-alert>
-    </div>
-
-
-<br />
-
-<table class="table table--hover table--striped">
-
-    <tr>
-        <th style="width:150px">Nome</th>
-        <th style="width:150px">Sexo</th>
-        <th style="width:150px">Tarefas</th>
-        <th>Ação</th>
-    </tr>
-    <tr ng-repeat="usuario in vm.usuarios">
-        
-        <td>
-            <div ng-if="usuario.preEditar == false">
-                {{ usuario.nome }}
-            </div>
-            <div ng-if="usuario.preEditar == true">
-                <input type="text" id="id" ng-model="usuario.nome" />
-            </div>
-        </td>
-        <td>
-            <div ng-if="usuario.preEditar == false">
-                {{ usuario.sexoUsuarioEnum }}
-            </div>
-            <div ng-if="usuario.preEditar == true">
-               	<div bb-dropdown bb-no-arrow="true">
-				    <a href id="simple-dropdown" bb-dropdown-toggle>
-				         {{ usuario.sexoUsuarioEnum }}
-				    </a>
-				    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
-				        <li role="menuitem" ng-repeat="sexo in vm.sexos" >
-				            <a ng-click="vm.setSexoUsuario(sexo,usuario)">{{ sexo.sexoUsuarioEnum }}</a>
-				        </li>
-				    </ul>
-				</div>
-            </div>    
-        </td>
-        
-        <td>
-        	<ul>
-        		<li ng-repeat="tarefa in usuario.listaTarefas">
-        			{{ tarefa.nome }}
-        		</li>
-        	</ul>
-        </td>
-       
-        <td>
-            <a ng-if="usuario.preEditar == false" ng-click="vm.editarUsuario(usuario,$index)">Editar</a>  
-            <a ng-if="usuario.preEditar == true" ng-click="vm.confirmarEditar(usuario,$index)">Confirmar</a>  
-            <a ng-if="usuario.preEditar == true" ng-click="vm.cancelarEditarUsuario(usuario,$index)"> Cancelar</a>  
-            <a ng-if="usuario.preEditar == false" ng-click="vm.excluirUsuario($index)"> excluir</a>
-        </td>
-    </tr>
-</table>
+	    <br /> 
+	    
+	    <div role="alert" aria-live="assertive" aria-atomic="true">
+	        <bb-alert bb-type="success" ng-show="vm.message != ''">
+	            <bb-alert-content>
+	                <p> {{vm.message}}</p>
+	            </bb-alert-content>
+	        </bb-alert>
+	
+	
+	        <bb-alert bb-type="error" ng-show="vm.errorMessage != ''">
+	            <bb-alert-content>
+	                <p>{{vm.errorMessage}}</p>
+	            </bb-alert-content>            
+	        </bb-alert>
+	    </div>
+	
+	
+		<br />
+			
+		<table class="table table--hover table--striped">
+	
+		    <tr>
+		        <th style="width:150px">Nome</th>
+		        <th style="width:150px">Sexo</th>
+		        <th style="width:150px">Tarefas</th>
+		        <th>Ação</th>
+		    </tr>
+		    <tr ng-repeat="usuario in vm.usuarios">
+		        
+		        <td>
+		            <div ng-if="usuario.preEditar == false">
+		                {{ usuario.nome }}
+		            </div>
+		            <div ng-if="usuario.preEditar == true">
+		                <input type="text" id="id" ng-model="usuario.nome" />
+		            </div>
+		        </td>
+		        <td>
+		            <div ng-if="usuario.preEditar == false">
+		                {{ usuario.sexoUsuarioEnum }}
+		            </div>
+		            <div ng-if="usuario.preEditar == true">
+		               	<div bb-dropdown bb-no-arrow="true">
+						    <a href id="simple-dropdown" bb-dropdown-toggle>
+						         {{ usuario.sexoUsuarioEnum }}
+						    </a>
+						    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
+						        <li role="menuitem" ng-repeat="sexo in vm.sexos" >
+						            <a ng-click="vm.setSexoUsuario(sexo,usuario)">{{ sexo.sexoUsuarioEnum }}</a>
+						        </li>
+						    </ul>
+						</div>
+		            </div>    
+		        </td>
+		        
+		        <td>
+		        	<ul>
+		        		<li ng-repeat="tarefa in usuario.listaTarefas">
+		        			{{ tarefa.nome }}
+		        		</li>
+		        	</ul>
+		        </td>
+		       
+		        <td>
+		            <a ng-if="usuario.preEditar == false" ng-click="vm.editarUsuario(usuario,$index)">Editar</a>  
+		            <a ng-if="usuario.preEditar == true" ng-click="vm.confirmarEditar(usuario,$index)">Confirmar</a>  
+		            <a ng-if="usuario.preEditar == true" ng-click="vm.cancelarEditarUsuario(usuario,$index)"> Cancelar</a>  
+		            <a ng-if="usuario.preEditar == false" ng-click="vm.excluirUsuario($index)"> excluir</a>
+		        </td>
+		    </tr>
+		</table>
+	</div>	
 
 </div>
