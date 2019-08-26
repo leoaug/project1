@@ -4,15 +4,17 @@
     angular.module('app')
         .controller('UserTemplateCtrl', UserTemplateCtrl);
 
-    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$http','TarefaService'];
+    UserTemplateCtrl.$inject = ['$rootScope', '$scope','$location','$http','TarefaService'];
 
-    function UserTemplateCtrl($rootScope, $scope ,$http,TarefaService) {
+    function UserTemplateCtrl($rootScope, $scope , $location,$http,TarefaService) {
 
         var vm = this;
 
         // recomendacoes do angular pra declarar funcoes (metodos) da Controller
         vm.getItem = getItem;
         vm.toggled = toggled;
+        
+        vm.redirect = redirect;
         
         vm.items = [
             { 
@@ -70,6 +72,10 @@
             // imprimit objeto com o alert
             //alert(itemTela.toSource().nome);
         }
+        
+        function redirect (urlRedirect) {
+  		  $location.url(urlRedirect);
+  	   }
 
     }
 })(angular);

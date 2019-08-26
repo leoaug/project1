@@ -2,6 +2,9 @@ var app = angular.module('UsuarioService', [])
 
 app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$httpParamSerializer) {
 
+	
+
+	
     this.editarUsuario = function editarUsuario(usuarioTela,vm,index) {
         
         //altera o campo preEditar do user para true para que apareça o input text dentro da tabela
@@ -155,8 +158,28 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         //return vm.usuarios;
        
     }
+  
+    
+    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event,mdDialog){
+    	
+    	// Appending dialog to document.body to cover sidenav in docs app
+        var confirm = mdDialog.confirm()
+              .title('Deseja Excluir o usuário?')
+              .textContent('Exclusão de Usuário')
+              .ariaLabel('Lucky day')
+              .targetEvent(event)
+              .ok('Confimar')
+              .cancel('Cancelar');
+        
+	      mdDialog.show(confirm).then(function() {
+            //$scope.status = 'You decided to get rid of your debt.';
+	    	  excluirUsuario(vm,index);
+          }, function() {
+            //$scope.status = 'You decided to keep your debt.';
+          });
+    }
 
-    this.excluirUsuario = function excluirUsuario(vm,index){
+    function excluirUsuario(vm,index){
     	
     	$http({
             method: 'DELETE',    
@@ -188,4 +211,6 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     
     	
     }
+    
+
 }]);

@@ -3,13 +3,48 @@
     <div ng-if="vm.carregando">
     	Carregando página ...
 	</div>
+	<div class="container">  
+	
+		<md-button ng-click="vm.redirect('/')" class="md-raised md-warn">Voltar</md-button>
+		<br/>
+		<br/>
+	  
+	
+	   
+	    <md-input-container>
+	         <label>Nome</label>
+			 <input ng-model="vm.usuario.nome" />
+	    </md-input-container>
+
+        <div bb-dropdown bb-no-arrow="true">
+		    <a href id="simple-dropdown" bb-dropdown-toggle>
+		        Escolha o Sexo:
+		    </a>
+		    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
+		        <li role="menuitem" ng-repeat="sexo in vm.sexos" >
+		            <a ng-click="vm.setSexo(sexo)">{{ sexo.sexoUsuarioEnum }}</a>
+		        </li>
+		    </ul>
+		 </div>
     
-    <div class="container">    
+
+	
+     <br /> 
+     
+      <md-button ng-click="vm.adicionarUsuario(vm.usuario)"  class="md-raised md-primary">Adicionar Usuário</md-button>
+   
+    
+    
+    	<!--  
         <table class="table table-bordered">
            
             <tr>
-                <td width="100">Nome:</td>
-                <td><input type="text" id="nome" ng-model="vm.usuario.nome" /></td>
+                <td width="100">                	
+		 			 <md-input-container>
+		          		<label>Nome</label>
+		          		<input type="text" id="nome" ng-model="vm.usuario.nome" />
+		        	</md-input-container>                	
+                </td>
             </tr>
             <tr>
                 <td width="100">Sexo</td>
@@ -28,10 +63,10 @@
             </tr>
            
         </table>
-        <br /> 
-        <input type="button" ng-click="vm.adicionarUsuario(vm.usuario)" value="Adicionar Usuário" />
+        -->
+        
    
-
+		<br/>
 	    <br /> 
 	    
 	    <div role="alert" aria-live="assertive" aria-atomic="true">
@@ -67,7 +102,10 @@
 		                {{ usuario.nome }}
 		            </div>
 		            <div ng-if="usuario.preEditar == true">
-		                <input type="text" id="id" ng-model="usuario.nome" />
+		                 <md-input-container>
+		                	<label>Nome</label>
+		                	<input id="id" ng-model="usuario.nome" />		                	
+		                </md-input-container>
 		            </div>
 		        </td>
 		        <td>
@@ -97,10 +135,20 @@
 		        </td>
 		       
 		        <td>
-		            <a ng-if="usuario.preEditar == false" ng-click="vm.editarUsuario(usuario,$index)">Editar</a>  
-		            <a ng-if="usuario.preEditar == true" ng-click="vm.confirmarEditar(usuario,$index)">Confirmar</a>  
+		           
+		            <md-button ng-if="usuario.preEditar == false" ng-click="vm.editarUsuario(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Editar">
+            			<md-icon ng-if="usuario.preEditar == false" md-svg-icon="app/spas/users/img/edit.svg"></md-icon>
+        			</md-button>
+		            
+		            <md-button ng-if="usuario.preEditar == true" ng-click="vm.confirmarEditar(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Confirmar">
+            			<md-icon ng-if="usuario.preEditar == true" md-svg-icon="app/spas/users/img/confirm_edit.svg"></md-icon>
+        			</md-button> 
+		              
 		            <a ng-if="usuario.preEditar == true" ng-click="vm.cancelarEditarUsuario(usuario,$index)"> Cancelar</a>  
-		            <a ng-if="usuario.preEditar == false" ng-click="vm.excluirUsuario($index)"> excluir</a>
+		            
+		             <div ng-if="usuario.preEditar == false" >
+		            	<a ng-if="usuario.preEditar == false" ng-click="vm.confirmarExcluirUsuario($index,$event)"> excluir</a>
+		             </div>
 		        </td>
 		    </tr>
 		</table>
