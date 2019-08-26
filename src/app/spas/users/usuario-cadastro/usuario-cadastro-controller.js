@@ -23,6 +23,7 @@
 	    vm.errorMessage = "";
 	    vm.message = "";
 	    vm.carregando = true;
+	    vm.usuariosOriginal = [];
 	    
 	// ================= Carregando a table de usuários ===================   
 	    

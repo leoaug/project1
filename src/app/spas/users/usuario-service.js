@@ -13,12 +13,9 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         //salva o user com o campo preEditar = true
         vm.usuarios[index] = usuarioTela;
 
-        //guarda uma cópia do user, criando o objeto 
-        //usuarioOriginal usuarioOriginal new usuarioOriginal()  
-        //usuarioOriginal =  vm.usuarios[index]
-        //em tempo de compilacao) para que quando cancelar a edição, volte com os valores originais
-        vm.usuarioOriginal = angular.copy(vm.usuarios[index]);
-
+        //guarda uma cópia do usuario antes de sua edição, para poder cancelar
+        vm.usuariosOriginal[index] = angular.copy(vm.usuarios[index]);
+        
         //limpa o formulario (setUSer(new User()))
         vm.usuario = {};
 
@@ -44,7 +41,7 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     			usuarioTela.preEditar = false;
 		        
 		        vm.usuarios[index] = usuarioTela;
-		        vm.usuarioOriginal = angular.copy(vm.usuarios[index]);
+		        vm.usuariosOriginal[index] = angular.copy(vm.usuarios[index]);
 		        vm.usuario = {}; 
 		        vm.message = "Usuário editado."
   	            vm.errorMessage = ''; 
@@ -69,7 +66,8 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
 
     this.cancelarEditarUsuario = function cancelarEditarUsuario(usuarioTela,vm,index) {
 
-        usuarioTela = vm.usuarioOriginal;
+    	//recuperando o usuário do valor original
+        usuarioTela = vm.usuariosOriginal[index];
         usuarioTela.preEditar = false;
         vm.usuarios[index] = usuarioTela;
 

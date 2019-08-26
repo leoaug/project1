@@ -5,7 +5,12 @@
 	</div>
 	<div class="container">  
 	
-		<md-button ng-click="vm.redirect('/')" class="md-raised md-warn">Voltar</md-button>
+		
+		<md-button ng-click="vm.redirect('/')" class="md-fab md-mini md-primary" aria-label="Voltar">
+      			<md-icon md-svg-icon="app/spas/users/img/back.svg"></md-icon>
+      			<md-tooltip md-direction="bottom">Voltar</md-tooltip>
+		</md-button> 
+		
 		<br/>
 		<br/>
 	  
@@ -31,40 +36,8 @@
 	
      <br /> 
      
-      <md-button ng-click="vm.adicionarUsuario(vm.usuario)"  class="md-raised md-primary">Adicionar Usuário</md-button>
+      <md-button ng-click="vm.adicionarUsuario(vm.usuario)" rounded="true"   class="md-raised md-primary">Adicionar Usuário</md-button>
    
-    
-    
-    	<!--  
-        <table class="table table-bordered">
-           
-            <tr>
-                <td width="100">                	
-		 			 <md-input-container>
-		          		<label>Nome</label>
-		          		<input type="text" id="nome" ng-model="vm.usuario.nome" />
-		        	</md-input-container>                	
-                </td>
-            </tr>
-            <tr>
-                <td width="100">Sexo</td>
-                <td>
-                   	<div bb-dropdown bb-no-arrow="true">
-					    <a href id="simple-dropdown" bb-dropdown-toggle>
-					        Escolha o Sexo:
-					    </a>
-					    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
-					        <li role="menuitem" ng-repeat="sexo in vm.sexos" >
-					            <a ng-click="vm.setSexo(sexo)">{{ sexo.sexoUsuarioEnum }}</a>
-					        </li>
-					    </ul>
-					</div>
-                </td>
-            </tr>
-           
-        </table>
-        -->
-        
    
 		<br/>
 	    <br /> 
@@ -93,7 +66,7 @@
 		        <th style="width:150px">Nome</th>
 		        <th style="width:150px">Sexo</th>
 		        <th style="width:150px">Tarefas</th>
-		        <th>Ação</th>
+		        <th style="text-align: center;width: 80px;">Ação</th>
 		    </tr>
 		    <tr ng-repeat="usuario in vm.usuarios">
 		        
@@ -104,7 +77,7 @@
 		            <div ng-if="usuario.preEditar == true">
 		                 <md-input-container>
 		                	<label>Nome</label>
-		                	<input id="id" ng-model="usuario.nome" />		                	
+		                	<input id="id" ng-model="usuario.nome" style="width: 100%" />		                	
 		                </md-input-container>
 		            </div>
 		        </td>
@@ -134,21 +107,43 @@
 		        	</ul>
 		        </td>
 		       
-		        <td>
-		           
-		            <md-button ng-if="usuario.preEditar == false" ng-click="vm.editarUsuario(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Editar">
-            			<md-icon ng-if="usuario.preEditar == false" md-svg-icon="app/spas/users/img/edit.svg"></md-icon>
-        			</md-button>
-		            
-		            <md-button ng-if="usuario.preEditar == true" ng-click="vm.confirmarEditar(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Confirmar">
-            			<md-icon ng-if="usuario.preEditar == true" md-svg-icon="app/spas/users/img/confirm_edit.svg"></md-icon>
-        			</md-button> 
-		              
-		            <a ng-if="usuario.preEditar == true" ng-click="vm.cancelarEditarUsuario(usuario,$index)"> Cancelar</a>  
-		            
-		             <div ng-if="usuario.preEditar == false" >
-		            	<a ng-if="usuario.preEditar == false" ng-click="vm.confirmarExcluirUsuario($index,$event)"> excluir</a>
-		             </div>
+		        <td style="text-align: center;">
+		          <div>
+			           <div ng-if="usuario.preEditar == false" style=" display: inline-block;">			           
+					        <div> 
+						        <md-button ng-click="vm.editarUsuario(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Editar">
+				            		<md-icon  md-svg-icon="app/spas/users/img/edit.svg"></md-icon>
+				            		<md-tooltip md-direction="bottom">Editar</md-tooltip>		        			
+				        	    </md-button>
+			        		</div> 
+				       </div>   
+				       <div ng-if="usuario.preEditar == true"  style=" display: inline-block;">	
+				       		<div> 
+					            <md-button ng-click="vm.confirmarEditar(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Confirmar">
+			            			<md-icon md-svg-icon="app/spas/users/img/confirm.svg"></md-icon>
+			            			<md-tooltip md-direction="bottom">Confirmar</md-tooltip>
+			        			</md-button> 
+			        		</div>
+			           </div>   
+			           <div ng-if="usuario.preEditar == true"  style=" display: inline-block;">	
+			           		<div>
+					            <md-button ng-click="vm.cancelarEditarUsuario(usuario,$index)" class="md-fab md-mini md-primary" aria-label="Cancelar">
+					            	<md-icon  md-svg-icon="app/spas/users/img/cancel.svg" ></md-icon>	
+					            	<md-tooltip md-direction="bottom">Cancelar</md-tooltip> 
+					            </md-button>
+				            </div>
+			           </div> 
+			           <div ng-if="usuario.preEditar == false" style=" display: inline-block;"> 
+			           		<div>
+					             <div ng-click="vm.confirmarExcluirUsuario($index,$event)" >
+					            	<md-button class="md-fab md-mini md-primary"  aria-label="Excluir">
+					            		<md-icon md-svg-icon="app/spas/users/img/delete.svg"></md-icon>
+					            		<md-tooltip md-direction="bottom">Excluir</md-tooltip> 
+					            	</md-button>
+					             </div>
+					        </div>
+				       </div>			      
+			       </div>
 		        </td>
 		    </tr>
 		</table>
