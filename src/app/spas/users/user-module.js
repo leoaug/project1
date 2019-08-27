@@ -27,4 +27,24 @@
 		  });
       
        */
+        .config(function($mdDateLocaleProvider) {
+
+        	$mdDateLocaleProvider.months = ['Janeiro', 'Fevereiro', 'Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+        	$mdDateLocaleProvider.shortMonths = ['Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+            $mdDateLocaleProvider.days = ['domingo', 'segunda', 'terça','quarta','quinta','sexta','sábado'];
+            $mdDateLocaleProvider.shortDays = ['Dom', 'Seg', 'Ter','Qua','Qui','Sex','Sab'];
+        	
+        	
+		    $mdDateLocaleProvider.parseDate = function(dateString) {
+			      var m = moment(dateString, 'DD/MM/YYYY', true);
+			      return m.isValid() ? m.toDate() : new Date(NaN);
+		    };  
+		  
+		    $mdDateLocaleProvider.formatDate = function(date) {
+			      var m = moment(date);
+			      return m.isValid() ? m.format('DD/MM/YYYY') : '';
+		    };
+    
+        })
+        
 })(angular);

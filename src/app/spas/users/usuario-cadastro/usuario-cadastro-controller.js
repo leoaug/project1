@@ -2,10 +2,10 @@
 
 	angular.module('app').controller('UsuarioCadastroCtrl', UsuarioCadastroCtrl);
 	
-	UsuarioCadastroCtrl.$inject = ['$scope','$location','$mdDialog','UsuarioService','RedirectService'];
+	UsuarioCadastroCtrl.$inject = ['$scope','$location','$mdDialog', '$mdToast' ,'UsuarioService','RedirectService'];
 	
 	
-	function UsuarioCadastroCtrl($scope, $location,$mdDialog , UsuarioService ,RedirectService ) {
+	function UsuarioCadastroCtrl($scope, $location, $mdDialog , $mdToast , UsuarioService ,RedirectService ) {
 	    
 	    var vm = this;
 	  
@@ -56,7 +56,7 @@
 	
 	    function adicionarUsuario(usuario) {
 		     
-	    	UsuarioService.adicionarUsuario(usuario,vm);
+	    	UsuarioService.adicionarUsuario(usuario,vm,$mdToast);
 		      
 		}
 	 
@@ -69,7 +69,7 @@
 	
 	    function confirmarEditar (usuario,index) {
 	       
-	    	UsuarioService.confirmarEditar(usuario,vm,index);
+	    	UsuarioService.confirmarEditar(usuario,vm,index,$mdToast);
 	    
 	    }
 	
@@ -81,7 +81,7 @@
 	    
 	    function confirmarExcluirUsuario(index,event) {
 	    	
-	    	UsuarioService.confirmarExcluirUsuario(vm,index,event,$mdDialog);
+	    	UsuarioService.confirmarExcluirUsuario(vm,index,event,$mdDialog,$mdToast);
 	   	
 	    }
 	

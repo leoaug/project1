@@ -26,8 +26,8 @@
 		        Escolha o Sexo:
 		    </a>
 		    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
-		        <li role="menuitem" ng-repeat="sexo in vm.sexos" >
-		            <a ng-click="vm.setSexo(sexo)">{{ sexo.sexoUsuarioEnum }}</a>
+		        <li role="menuitem" ng-repeat="sexo in vm.sexos">
+		            <a style="text-decoration:none" ng-click="vm.setSexo(sexo)">{{ sexo.sexoUsuarioEnum }}</a>
 		        </li>
 		    </ul>
 		 </div>
@@ -36,7 +36,7 @@
 	
      <br /> 
      
-      <md-button ng-click="vm.adicionarUsuario(vm.usuario)" rounded="true"   class="md-raised md-primary">Adicionar Usuário</md-button>
+      <md-button ng-click="vm.adicionarUsuario(vm.usuario)" rounded="true"  class="md-raised md-primary">Adicionar Usuário</md-button>
    
    
 		<br/>
@@ -59,14 +59,14 @@
 	
 	
 		<br />
-			
+	
 		<table class="table table--hover table--striped">
 	
 		    <tr>
-		        <th style="width:150px">Nome</th>
-		        <th style="width:150px">Sexo</th>
-		        <th style="width:150px">Tarefas</th>
-		        <th style="text-align: center;width: 80px;">Ação</th>
+		        <th >Nome</th>
+		        <th >Sexo</th>
+		        <th >Tarefas</th>
+		        <th style="text-align: center;">Ação</th>
 		    </tr>
 		    <tr ng-repeat="usuario in vm.usuarios">
 		        
@@ -147,6 +147,7 @@
 		        </td>
 		    </tr>
 		</table>
+		
 	</div>	
 
 </div>

@@ -22,7 +22,7 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         return usuarioTela; 
     }
 
-    this.confirmarEditar = function confirmarEditar(usuarioTela,vm,index){
+    this.confirmarEditar = function confirmarEditar(usuarioTela,vm,index,mdToast){
     	
     	//deletar esse atributo do usuario, pois ele não existe no json do backEnd , e da erro 400
     	delete usuarioTela.preEditar;   	
@@ -43,8 +43,14 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
 		        vm.usuarios[index] = usuarioTela;
 		        vm.usuariosOriginal[index] = angular.copy(vm.usuarios[index]);
 		        vm.usuario = {}; 
-		        vm.message = "Usuário editado."
+		        
+		        criarToastMensagem("Usuário editado." ,mdToast);
+		        
+		        //vm.message = "Usuário editado."
   	            vm.errorMessage = ''; 
+  	            
+  	            
+  	            
   			},
   			function error(response) {
   				if (response.status === 404){
@@ -64,6 +70,8 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         return usuarioTela;
     }
 
+    
+    
     this.cancelarEditarUsuario = function cancelarEditarUsuario(usuarioTela,vm,index) {
 
     	//recuperando o usuário do valor original
@@ -76,7 +84,7 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         return usuarioTela;
     }
 
-    this.adicionarUsuario = function adicionarUsuario(usuarioTela,vm){
+    this.adicionarUsuario = function adicionarUsuario(usuarioTela,vm,mdToast){
           
         if (usuarioTela != null && usuarioTela.nome && usuarioTela.sexoUsuarioEnum) {    
         	        	
@@ -101,7 +109,10 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     	            
     	            vm.usuario = {}; 
     	            
-    	            vm.message = "Usuário cadastrado."
+    	            //vm.message = "Usuário cadastrado."
+    	            
+    	            criarToastMensagem("Usuário cadastrado.",mdToast);
+    	            
     	            	
     	            vm.errorMessage = ''; 
     	            
@@ -158,12 +169,12 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     }
   
     
-    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event,mdDialog){
+    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event,mdDialog,mdToast){
     	
     	// Appending dialog to document.body to cover sidenav in docs app
         var confirm = mdDialog.confirm()
               .title('Deseja Excluir o usuário?')
-              .textContent('Exclusão de Usuário')
+              .textContent('Excluir o(a) ' + vm.usuarios[index].nome + "?")
               .ariaLabel('Lucky day')
               .targetEvent(event)
               .ok('Confimar')
@@ -171,13 +182,13 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         
 	      mdDialog.show(confirm).then(function() {
             //$scope.status = 'You decided to get rid of your debt.';
-	    	  excluirUsuario(vm,index);
+	    	  excluirUsuario(vm,index,mdToast);
           }, function() {
             //$scope.status = 'You decided to keep your debt.';
           });
     }
 
-    function excluirUsuario(vm,index){
+    function excluirUsuario(vm,index,mdToast){
     	
     	$http({
             method: 'DELETE',    
@@ -192,7 +203,8 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         .then(
 		    function success(response){	
 		    	vm.usuarios.splice(index,1);
-		    	vm.message = "Usuário excluído.";
+		    	//vm.message = "Usuário excluído.";
+		    	criarToastMensagem("Usuário excluído.",mdToast);
 		    	vm.errorMessage = "";
 			},
 			function error(response) {
@@ -210,5 +222,18 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     	
     }
     
+    function criarToastMensagem(mensagem,mdToast){
+    	mdToast.show(
+    	   mdToast.simple()
+    	        .textContent(mensagem)
+    	        .toastClass("toast-info")
+    	        .position("top right")
+    	        .hideDelay(3000))
+    	   .then(function() {
+    	        console.log('Toast dismissed.');
+    	   }).catch(function() {
+    		   console.log('Toast failed or was forced to close early by another toast.');
+    	});
+    }
 
 }]);

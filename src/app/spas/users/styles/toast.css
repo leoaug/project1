@@ -1,0 +1,12 @@
+.toast-sucess .md-toast-content{
+  background-color: rgb(102,187,106) !important;
+}
+
+.toast-info .md-toast-content{
+  background-color: #3949AB !important;
+  font-weight: bolder !important;
+}
+
+.toast-error .md-toast-content{
+  background-color: rgb(239,83,80) !important;
+}

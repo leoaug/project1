@@ -3,211 +3,197 @@
     <div ng-if="vm.carregando">
     	Carregando página ...
 	</div>
+    
+	<div class="container">  
+    
+   
 	
-	<md-button ng-click="vm.redirect('/')" class="md-fab md-mini md-primary" aria-label="Voltar">
-  			<md-icon md-svg-icon="app/spas/users/img/back.svg"></md-icon>
-  			<md-tooltip md-direction="bottom">Voltar</md-tooltip>
-	</md-button> 
-	
-	<br/>
-	<br/>
+		<md-button ng-click="vm.redirect('/')" class="md-fab md-mini md-primary" aria-label="Voltar">
+	  			<md-icon md-svg-icon="app/spas/users/img/back.svg"></md-icon>
+	  			<md-tooltip md-direction="bottom">Voltar</md-tooltip>
+		</md-button> 
 		
-
-	<div layout="column" ng-cloak class="md-inline-form">
+		<br/>
+		<br/>
+			
 	
-	  <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-	    <div>
-	      <md-input-container>
-	        <label>Title</label>
-	        <input ng-model="user.title">
-	      </md-input-container>
-	
-	      <md-input-container>
-	        <label>Email</label>
-	        <input ng-model="user.email" type="email">
-	      </md-input-container>
-	    </div>
-	  </md-content>
-	
-	  <md-content layout-padding>
-	    <div>
-	      <form name="userForm">
-	
-	        <div layout-gt-xs="row">
-	          <md-input-container class="md-block" flex-gt-xs>
-	            <label>Company (Disabled)</label>
-	            <input ng-model="user.company" disabled>
-	          </md-input-container>
-	
-	          <md-input-container>
-	            <label>Enter date</label>
-	            <md-datepicker ng-model="user.submissionDate" aria-label="Enter date"></md-datepicker>
-	          </md-input-container>
-	        </div>
-	
-	        <div layout-gt-sm="row">
-	          <md-input-container class="md-block" flex-gt-sm>
-	            <label>First name</label>
-	            <input ng-model="user.firstName">
-	          </md-input-container>
-	
-	          <md-input-container class="md-block" flex-gt-sm>
-	            <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-	            <input ng-model="theMax">
-	          </md-input-container>
-	        </div>
-	
-	        <md-input-container class="md-block">
-	          <label>Address</label>
-	          <input ng-model="user.address">
-	        </md-input-container>
-	
-	        <md-input-container md-no-float class="md-block">
-	          <input ng-model="user.address2" placeholder="Address 2" aria-label="Address 2">
-	        </md-input-container>
-	
-	        <div layout-gt-sm="row">
-	          <md-input-container class="md-block" flex-gt-sm>
-	            <label>City</label>
-	            <input ng-model="user.city">
-	          </md-input-container>
-	
-	          <md-input-container class="md-block" flex-gt-sm>
-	            <label>State</label>
-	            <md-select ng-model="user.state">
-	              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-	                {{state.abbrev}}
-	              </md-option>
-	            </md-select>
-	          </md-input-container>
-	
-	          <md-input-container class="md-block" flex-gt-sm>
-	            <label>Postal Code</label>
-	            <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
-	                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
-	
-	            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-	              <div ng-message="required" class="my-message">You must supply a postal code.</div>
-	              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
-	                code.
-	              </div>
-	              <div ng-message="md-maxlength" class="my-message">
-	                Don't use the long version silly...we don't need to be that specific...
-	              </div>
-	            </div>
-	          </md-input-container>
-	        </div>
-	
-	        <md-input-container class="md-block">
-	          <label>Biography</label>
-	          <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-	        </md-input-container>
-	
-	      </form>
-	    </div>
-	  </md-content>
-	
-	</div>
-
-	<br/>
-	
-	
-	
-	
-	
-	<div class="container">    
-        <table class="table table-bordered">
-           
-            <tr>
-                <td width="100">Nome:</td>
-                <td><input type="text" id="nome" ng-model="vm.tarefa.nome" /></td>
-            </tr>
-            <tr>
-            	<td width="100">Usuário:</td>
-            	<td>
-            		<div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)">
-					    <a href id="simple-dropdown" bb-dropdown-toggle>
+		<div layout="column" ng-cloak class="md-inline-form">
+		
+		  <md-content layout-padding>
+		    <div>
+		      <form name="tarefaForm">
+		
+		        <div layout-gt-xs="row">
+		          <md-input-container class="md-block" flex-gt-sm>
+		             <label>Nome</label>
+					 <input ng-model="vm.tarefa.nome" />
+		          </md-input-container>
+		
+				  <div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)" class="md-block" flex-gt-sm>
+					    <a href id="simple-dropdown" bb-dropdown-toggle class="md-block" flex-gt-sm>
 					        Selecione o Usuário:
 					    </a>
 					    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
 					        <li role="menuitem" ng-repeat="usuario in vm.usuarios" >
-					            <a style="text-decoration:none">{{ usuario.nome }}</a>
+					            <a ng-click="vm.setUsuario(usuario)" style="text-decoration:none" >{{ usuario.nome }}</a>
 					        </li>
 					    </ul>
-					</div>
-            	</td>
-            </tr>
-       </table>
-       
-       <br/>
-       
-        <div role="alert" aria-live="assertive" aria-atomic="true">
-	        <bb-alert bb-type="success" ng-show="vm.message != ''">
-	            <bb-alert-content>
-	                <p> {{vm.message}}</p>
-	            </bb-alert-content>
-	        </bb-alert>
+				  </div>
+		
+		          <md-input-container >
+			            <label>Data Início</label>
+			            <md-datepicker ng-model="vm.tarefa.dataInicio"  aria-label="Data Início" ></md-datepicker>
+		          </md-input-container>
+		          
+		          <md-input-container >
+			            <label>Data Fim</label>
+			            <md-datepicker ng-model="vm.tarefa.dataFim"  aria-label="Data Fim"></md-datepicker>
+		          </md-input-container>
+		          
+		        </div>
+		        <div layout-gt-xs="row">
+		        	<md-radio-group ng-model="vm.tarefa.statusTarefaEnum">
 	
+			        	<md-radio-button ng-repeat="statusTarefa in vm.statusTarefasEnums"
+			        				     aria-label="{{ statusTarefa.statusTarefaEnum }}"		        				 
+			                         	 ng-value="statusTarefa.statusTarefaEnum">
+			                         	 
+			                         	 {{ statusTarefa.statusTarefaEnum }}
+			                         	 
+						</md-radio-button>
 	
-	        <bb-alert bb-type="error" ng-show="vm.errorMessage != ''">
-	            <bb-alert-content>
-	                <p>{{vm.errorMessage}}</p>
-	            </bb-alert-content>            
-	        </bb-alert>
-	    </div>
+	    			</md-radio-group>
+	    		</div>	
+	    		
+	    		 <md-button ng-click="vm.adicionarTarefa(vm.tarefa)" class="md-raised md-primary">Adicionar Tarefa</md-button>
+	    		
+		      </form>
+		    </div>
+		  </md-content>
+		
+		</div>
 	
 		<br/>
-       
-       <table class="table table--hover table--striped">
-
-	    <tr>
-	        <th style="width:150px">Nome</th>
-	        <th style="width:150px">Usuário</th>
-	        <th style="width:150px">Data Início</th>
-	        <th style="width:150px">Data Fim</th>
-	        <th style="width:50px">Status</th>
-	        <th>Ação</th>
-	    </tr>
-	    <tr ng-repeat="tarefa in vm.tarefas">
-	    
-	    	<td>
-	    		<div ng-if="tarefa.preEditar == false">
-	    			{{ tarefa.nome }}
-	    		</div>
-	    		
-	    		<div ng-if="tarefa.preEditar == true">
-	    			<input type="text" id="id" ng-model="tarefa.nome" />
-	    		</div>
-	    	</td>
-	    
-	    	<td>
-	    		<div ng-if="tarefa.preEditar == false">
-	    			{{ tarefa.usuario.nome }}
-	    		</div>
-	    	</td>
-	    	
-	    	<td>
-	    		<div ng-if="tarefa.preEditar == false">
-	    			{{ tarefa.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
-	    		</div>
-	    	</td>
-	    	
-	    	<td>
-	    		<div ng-if="tarefa.preEditar == false">
-	    			{{ tarefa.dataFim | date: 'dd/MM/yyyy HH:mm' }}
-	    		</div>
-	    	</td>
-	    
-	    	<td>
-	    		<div ng-if="tarefa.preEditar == false">
-	    			{{ tarefa.statusTarefaEnum }}
-	    		</div>
-	    	</td>
-	    </tr>
+		
+		  
 	       
 	       
+	       <br/>
 	       
-	</div>   
+	        <div role="alert" aria-live="assertive" aria-atomic="true">
+		        <bb-alert bb-type="success" ng-show="vm.message != ''">
+		            <bb-alert-content>
+		                <p> {{vm.message}}</p>
+		            </bb-alert-content>
+		        </bb-alert>
+		
+		
+		        <bb-alert bb-type="error" ng-show="vm.errorMessage != ''">
+		            <bb-alert-content>
+		                <p>{{vm.errorMessage}}</p>
+		            </bb-alert-content>            
+		        </bb-alert>
+		    </div>
+		
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+	       
+	       <table class="table table--hover table--striped">
+	
+		    <tr>
+		        <th style="width:150px">Nome</th>
+		        <th style="width:150px">Usuário</th>
+		        <th style="width:150px">Data Início</th>
+		        <th style="width:150px">Data Fim</th>
+		        <th style="width:50px">Status</th>
+		        <th style="text-align: center;">Ação</th>
+		    </tr>
+		    <tr ng-repeat="tarefa in vm.tarefas">
+		    
+		    	<td>
+		    		<div ng-if="tarefa.preEditar == false">
+		    			{{ tarefa.nome }}
+		    		</div>
+		    		
+		    		<div ng-if="tarefa.preEditar == true">
+		    			<md-input-container class="md-block" flex-gt-sm>
+				             <label>Nome</label>
+							 <input ng-model="tarefa.nome" />
+		         		 </md-input-container>
+		    		</div>
+		    	</td>
+		    
+		    	<td>
+		    		<div ng-if="tarefa.preEditar == false">
+		    			{{ tarefa.usuario.nome }}
+		    		</div>
+		    	</td>
+		    	
+		    	<td>
+		    		<div ng-if="tarefa.preEditar == false">
+		    			{{ tarefa.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
+		    		</div>
+		    	</td>
+		    	
+		    	<td>
+		    		<div ng-if="tarefa.preEditar == false">
+		    			{{ tarefa.dataFim | date: 'dd/MM/yyyy HH:mm' }}
+		    		</div>
+		    	</td>
+		    
+		    	<td>
+		    		<div ng-if="tarefa.preEditar == false">
+		    			{{ tarefa.statusTarefaEnum }}
+		    		</div>
+		    	</td>
+		    	
+		    	<td style="text-align: center;">
+		          <div>
+			           <div ng-if="tarefa.preEditar == false" style=" display: inline-block;">			           
+					        <div> 
+						        <md-button ng-click="vm.editarTarefa(tarefa,$index)" class="md-fab md-mini md-primary" aria-label="Editar">
+				            		<md-icon  md-svg-icon="app/spas/users/img/edit.svg"></md-icon>
+				            		<md-tooltip md-direction="bottom">Editar</md-tooltip>		        			
+				        	    </md-button>
+			        		</div> 
+				       </div>   
+				       <div ng-if="tarefa.preEditar == true"  style=" display: inline-block;">	
+				       		<div> 
+					            <md-button ng-click="vm.confirmarEditar(tarefa,$index)" class="md-fab md-mini md-primary" aria-label="Confirmar">
+			            			<md-icon md-svg-icon="app/spas/users/img/confirm.svg"></md-icon>
+			            			<md-tooltip md-direction="bottom">Confirmar</md-tooltip>
+			        			</md-button> 
+			        		</div>
+			           </div>   
+			           <div ng-if="tarefa.preEditar == true"  style=" display: inline-block;">	
+			           		<div>
+					            <md-button ng-click="vm.cancelarEditarTarefa(tarefa,$index)" class="md-fab md-mini md-primary" aria-label="Cancelar">
+					            	<md-icon  md-svg-icon="app/spas/users/img/cancel.svg" ></md-icon>	
+					            	<md-tooltip md-direction="bottom">Cancelar</md-tooltip> 
+					            </md-button>
+				            </div>
+			           </div> 
+			           <div ng-if="tarefa.preEditar == false" style=" display: inline-block;"> 
+			           		<div>
+					             <div ng-click="vm.confirmarExcluirTarefa($index,$event)" >
+					            	<md-button class="md-fab md-mini md-primary"  aria-label="Excluir">
+					            		<md-icon md-svg-icon="app/spas/users/img/delete.svg"></md-icon>
+					            		<md-tooltip md-direction="bottom">Excluir</md-tooltip> 
+					            	</md-button>
+					             </div>
+					        </div>
+				       </div>			      
+			       </div>
+		        </td>
+		    	
+		    	
+		    </tr>
+		       
+		       
+		       
+		</div>   
  
 	 
 	
