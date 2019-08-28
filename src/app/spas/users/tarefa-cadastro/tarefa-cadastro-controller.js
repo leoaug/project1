@@ -14,6 +14,7 @@
 		vm.message = "";
 		vm.tarefa = {};
 		vm.tarefa.statusTarefaEnum = "ATIVA";
+		vm.tarefasOriginal = [];
 		vm.statusTarefasEnums = [ 
 			{ statusTarefaEnum : "ATIVA" },
 			{ statusTarefaEnum : "CANCELADA" }			 			   			
@@ -23,7 +24,9 @@
 		
 		vm.adicionarTarefa = adicionarTarefa;
 		vm.setUsuario = setUsuario;
+		vm.setUsuarioTarefa = setUsuarioTarefa;
 		vm.editarTarefa = editarTarefa;
+		vm.cancelarEditarTarefa = cancelarEditarTarefa;
 
 // =========== extende metodos que sao usados em ql controller =============
 		
@@ -32,7 +35,7 @@
 // ================= Carregando o bb-dropdown de usuários ===================   
 	    
 		vm.carregando = true;
-	    UsuarioService.getUsuarios(vm);
+		UsuarioService.getUsuarios(vm,$mdDialog);
 
 	    
 // ================= Carregando tarefas para o table de tarefas ============	    
@@ -48,6 +51,12 @@
 	    
 	    }
 	    
+	    function setUsuarioTarefa(usuario,tarefa) {
+	    	
+	    	tarefa.usuario = angular.copy(usuario);
+	    
+	    }
+	    
 	    function adicionarTarefa(tarefa){
 	    	
 	    	TarefaService.adicionarTarefa(tarefa,vm,$mdToast);	    	
@@ -57,6 +66,12 @@
 	    function editarTarefa(tarefa,index){
 	    	
 	    	TarefaService.editarTarefa(tarefa,vm,index);
+	    	
+	    }
+	    
+	    function cancelarEditarTarefa(tarefa,index){
+	    	
+	    	TarefaService.cancelarEditarTarefa(tarefa,vm,index);
 	    	
 	    }
 		

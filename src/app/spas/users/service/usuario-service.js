@@ -17,9 +17,9 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         vm.usuariosOriginal[index] = angular.copy(vm.usuarios[index]);
         
         //limpa o formulario (setUSer(new User()))
-        vm.usuario = {};
+        //vm.usuario = {};
 
-        return usuarioTela; 
+       // return usuarioTela; 
     }
 
     this.confirmarEditar = function confirmarEditar(usuarioTela,vm,index,mdToast){
@@ -79,9 +79,9 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         usuarioTela.preEditar = false;
         vm.usuarios[index] = usuarioTela;
 
-        vm.usuario = {};
+        //vm.usuario = {};
 
-        return usuarioTela;
+        //return usuarioTela;
     }
 
     this.adicionarUsuario = function adicionarUsuario(usuarioTela,vm,mdToast){
@@ -135,8 +135,12 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
             console.log(vm.errorMessage);
         }
     }
-    this.getUsuarios = function getUsuarios(vm){
-        return $http({
+    this.getUsuarios = function getUsuarios(vm,mdDialog){
+        
+    	
+    	var dialog = mostrarDialog(mdDialog);
+    	
+    	return $http({
           method: 'GET',
           url: 'http://localhost:8080/listatarefas/rest/usuario/listarUsuarios'
         })
@@ -161,7 +165,8 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
 				vm.errorMessage = "Erro ao carregar os usuários, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
 			}
 	    ).finally(function () {
-	    	 vm.carregando = false;
+	    	esconderDialog(mdDialog,dialog);
+	    	vm.carregando = false;
 	    });
         
         //return vm.usuarios;
@@ -221,6 +226,38 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     
     	
     }
+    
+    function mostrarDialog(mdDialog){
+    	/* 
+    	var alert = mdDialog.alert()
+        			.parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('This is an alert title')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        //.targetEvent(event)
+        */
+    	var alert; 
+    	mdDialog.show(
+    			alert =	mdDialog.alert()
+				        .parent(angular.element(document.querySelector('#popupContainer')))
+				        .clickOutsideToClose(false)
+				        .title('Carregando...')
+				        //.textContent('You can specify some description text in here.')
+				        .ariaLabel('Alert Dialog Demo')
+		        //.ok('Got it!')
+        //.targetEvent(ev)
+      );
+    	
+    	return alert;
+    }
+    
+    function esconderDialog(mdDialog,dialog){
+    	
+    	mdDialog.hide(dialog, "new foobar!");
+    }
+    
     
     function criarToastMensagem(mensagem,mdToast){
     	mdToast.show(

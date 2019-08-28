@@ -129,11 +129,29 @@
 		    		<div ng-if="tarefa.preEditar == false">
 		    			{{ tarefa.usuario.nome }}
 		    		</div>
+		    		
+		    		<div ng-if="tarefa.preEditar == true">
+		    			 <div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)">
+						    <a href id="simple-dropdown" bb-dropdown-toggle class="md-block" flex-gt-sm>
+						        {{ tarefa.usuario.nome }}
+						    </a>
+						    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
+						        <li role="menuitem" ng-repeat="usuario in vm.usuarios" >
+						            <a ng-click="vm.setUsuarioTarefa(usuario,tarefa)" style="text-decoration:none" >{{ usuario.nome }}</a>
+						        </li>
+						    </ul>
+				  		</div>
+		    		</div>
+		    		
 		    	</td>
 		    	
 		    	<td>
 		    		<div ng-if="tarefa.preEditar == false">
 		    			{{ tarefa.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
+		    		</div>
+		    		
+		    		<div ng-if="tarefa.preEditar == true">
+		    		
 		    		</div>
 		    	</td>
 		    	
@@ -146,6 +164,10 @@
 		    	<td>
 		    		<div ng-if="tarefa.preEditar == false">
 		    			{{ tarefa.statusTarefaEnum }}
+		    		</div>
+		    		
+		    		<div ng-if="tarefa.preEditar == true">
+		    		
 		    		</div>
 		    	</td>
 		    	

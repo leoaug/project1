@@ -126,9 +126,30 @@ angular.module('TarefaService', []).service('TarefaService',['$http', function (
 	   
 	   this.editarTarefa = function editarTarefa(tarefa , vm , index){
 		   
+		 //altera o campo preEditar do user para true para que apareça o input text dentro da tabela
 		   tarefa.preEditar = true;
+
+	        //salva o user com o campo preEditar = true
+	        vm.tarefas[index] = tarefa;
+
+	        //guarda uma cópia do usuario antes de sua edição, para poder cancelar
+	        vm.tarefasOriginal[index] = angular.copy(vm.tarefas[index]);
+	        
+	        //limpa o formulario (como se fosse em java: setTarefa(new Tarefa()))
+	        //vm.tarefa = {};
 		   
 	   }
+	   
+	   this.cancelarEditarTarefa = function cancelarEditarTarefa(tarefa,vm,index) {
+
+	    	//recuperando a tarefa do valor original
+		    tarefa = vm.tarefasOriginal[index];
+		    tarefa.preEditar = false;
+	        vm.tarefas[index] = tarefa;
+
+	        //vm.tarefa = {};
+
+	    }
 	   
 	   function criarToastMensagem(mensagem,mdToast){
 	    	mdToast.show(

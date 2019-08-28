@@ -2,7 +2,7 @@
 
 	angular.module('app').controller('UsuarioCadastroCtrl', UsuarioCadastroCtrl);
 	
-	UsuarioCadastroCtrl.$inject = ['$scope','$location','$mdDialog', '$mdToast' ,'UsuarioService','RedirectService'];
+	UsuarioCadastroCtrl.$inject = ['$scope','$location','$mdDialog','$mdToast' ,'UsuarioService','RedirectService'];
 	
 	
 	function UsuarioCadastroCtrl($scope, $location, $mdDialog , $mdToast , UsuarioService ,RedirectService ) {
@@ -27,7 +27,7 @@
 	    
 	// ================= Carregando a table de usuários ===================   
 	    
-	    UsuarioService.getUsuarios(vm);
+	    UsuarioService.getUsuarios(vm,$mdDialog);
 	    
 	//=================== funcoes da controller ==========================================
 	    
