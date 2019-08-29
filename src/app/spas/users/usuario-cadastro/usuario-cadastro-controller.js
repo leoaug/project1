@@ -2,10 +2,10 @@
 
 	angular.module('app').controller('UsuarioCadastroCtrl', UsuarioCadastroCtrl);
 	
-	UsuarioCadastroCtrl.$inject = ['$scope','$location','$mdDialog','$mdToast' ,'UsuarioService','RedirectService'];
+	UsuarioCadastroCtrl.$inject = ['$scope','$location','UsuarioService','RedirectService'];
 	
 	
-	function UsuarioCadastroCtrl($scope, $location, $mdDialog , $mdToast , UsuarioService ,RedirectService ) {
+	function UsuarioCadastroCtrl($scope, $location, UsuarioService ,RedirectService ) {
 	    
 	    var vm = this;
 	  
@@ -22,12 +22,11 @@
 	 
 	    vm.errorMessage = "";
 	    vm.message = "";
-	    vm.carregando = true;
 	    vm.usuariosOriginal = [];
 	    
 	// ================= Carregando a table de usuários ===================   
 	    
-	    UsuarioService.getUsuarios(vm,$mdDialog);
+	    UsuarioService.getUsuarios(vm);
 	    
 	//=================== funcoes da controller ==========================================
 	    
@@ -56,7 +55,7 @@
 	
 	    function adicionarUsuario(usuario) {
 		     
-	    	UsuarioService.adicionarUsuario(usuario,vm,$mdToast);
+	    	UsuarioService.adicionarUsuario(usuario,vm);
 		      
 		}
 	 
@@ -69,7 +68,7 @@
 	
 	    function confirmarEditar (usuario,index) {
 	       
-	    	UsuarioService.confirmarEditar(usuario,vm,index,$mdToast);
+	    	UsuarioService.confirmarEditar(usuario,vm,index);
 	    
 	    }
 	
@@ -81,7 +80,7 @@
 	    
 	    function confirmarExcluirUsuario(index,event) {
 	    	
-	    	UsuarioService.confirmarExcluirUsuario(vm,index,event,$mdDialog,$mdToast);
+	    	UsuarioService.confirmarExcluirUsuario(vm,index,event);
 	   	
 	    }
 	

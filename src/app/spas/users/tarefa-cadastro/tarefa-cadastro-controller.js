@@ -4,12 +4,12 @@
 	angular.module('app')
 			.controller('TarefaCadastroCtrl', TarefaCadastroCtrl);
 
-	TarefaCadastroCtrl.$inject = [ '$scope','$location','$mdDialog', '$mdToast','$controller' , 'TarefaService', 'UsuarioService','RedirectService'];
+	TarefaCadastroCtrl.$inject = [ '$scope','$location', '$mdToast','$controller' , 'TarefaService', 'UsuarioService','RedirectService'];
 
-	function TarefaCadastroCtrl($scope, $location , $mdDialog, $mdToast, $controller , TarefaService , UsuarioService, RedirectService) {
+	function TarefaCadastroCtrl($scope, $location , $mdToast, $controller , TarefaService , UsuarioService, RedirectService) {
 
 		var vm = this;
-		
+			
 		vm.errorMessage = "";
 		vm.message = "";
 		vm.tarefa = {};
@@ -34,16 +34,16 @@
 		 		
 // ================= Carregando o bb-dropdown de usuários ===================   
 	    
-		vm.carregando = true;
-		UsuarioService.getUsuarios(vm,$mdDialog);
+		UsuarioService.getUsuarios(vm);
 
 	    
 // ================= Carregando tarefas para o table de tarefas ============	    
-	    
-	    vm.carregando = true;
+
 	    TarefaService.getTarefas(vm);
 
 // ================ Funcções da controler ==================================
+	    
+	 
 	    
 	    function setUsuario(usuario){
 	    	
@@ -74,6 +74,7 @@
 	    	TarefaService.cancelarEditarTarefa(tarefa,vm,index);
 	    	
 	    }
+	    
 		
 	}
 

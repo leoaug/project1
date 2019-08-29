@@ -9,6 +9,8 @@
             'ngMessages',
             'UsuarioService', 
             'TarefaService',
+            'DialogService',
+            'ToastService',
             'RedirectService',
             'bb.dropdown', 
             'bb.chip',

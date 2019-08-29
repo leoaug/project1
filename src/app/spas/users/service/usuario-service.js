@@ -1,8 +1,43 @@
-var app = angular.module('UsuarioService', [])
 
-app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$httpParamSerializer) {
+angular.module('UsuarioService', []).service('UsuarioService', UsuarioService);
 
+UsuarioService.$inject = ['$http','$httpParamSerializer', 'DialogService','ToastService'];
+
+function UsuarioService($http, $httpParamSerializer, DialogService,ToastService) {
 	
+	this.getUsuarios = function getUsuarios(vm){
+	    
+		DialogService.mostrarDialog();
+    	
+    	return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/listatarefas/rest/usuario/listarUsuarios'
+        })
+        .then(
+			function success(response){
+				vm.usuarios = angular.copy(response.data);
+				//aicionando um novoa tributo ao array de objetos do usuario
+				angular.forEach(vm.usuarios, function(usuario) {
+					usuario.preEditar = false;
+		        });
+				
+			},
+			function error(response) {
+				if (response.status === 404 || response.status === -1){
+					vm.errorMessage = "Erro ao carregar a tabela de usuários , causa : " + response.data + ", status: " + response.status; 
+				} else {
+					vm.errorMessage = "Código do Status " +response.status;
+					console.log("Código do Status " +response.status );
+				}
+				vm.message = "";
+				vm.errorMessage = "Erro ao carregar os usuários, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
+			}
+	    ).finally(function () {
+	    	DialogService.esconderDialog();
+	    });
+	        
+	       
+	 }
 
 	
     this.editarUsuario = function editarUsuario(usuarioTela,vm,index) {
@@ -16,13 +51,10 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         //guarda uma cópia do usuario antes de sua edição, para poder cancelar
         vm.usuariosOriginal[index] = angular.copy(vm.usuarios[index]);
         
-        //limpa o formulario (setUSer(new User()))
-        //vm.usuario = {};
-
-       // return usuarioTela; 
+      
     }
 
-    this.confirmarEditar = function confirmarEditar(usuarioTela,vm,index,mdToast){
+    this.confirmarEditar = function confirmarEditar(usuarioTela,vm,index){
     	
     	//deletar esse atributo do usuario, pois ele não existe no json do backEnd , e da erro 400
     	delete usuarioTela.preEditar;   	
@@ -44,7 +76,7 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
 		        vm.usuariosOriginal[index] = angular.copy(vm.usuarios[index]);
 		        vm.usuario = {}; 
 		        
-		        criarToastMensagem("Usuário editado." ,mdToast);
+		        ToastService.criarToastMensagem("Usuário editado.","toast-info","top right",3000);
 		        
 		        //vm.message = "Usuário editado."
   	            vm.errorMessage = ''; 
@@ -76,15 +108,14 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
 
     	//recuperando o usuário do valor original
         usuarioTela = vm.usuariosOriginal[index];
+        
         usuarioTela.preEditar = false;
+        
         vm.usuarios[index] = usuarioTela;
 
-        //vm.usuario = {};
-
-        //return usuarioTela;
     }
 
-    this.adicionarUsuario = function adicionarUsuario(usuarioTela,vm,mdToast){
+    this.adicionarUsuario = function adicionarUsuario(usuarioTela,vm){
           
         if (usuarioTela != null && usuarioTela.nome && usuarioTela.sexoUsuarioEnum) {    
         	        	
@@ -108,11 +139,8 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     	            console.log(vm.usuarios);
     	            
     	            vm.usuario = {}; 
-    	            
-    	            //vm.message = "Usuário cadastrado."
-    	            
-    	            criarToastMensagem("Usuário cadastrado.",mdToast);
-    	            
+    	                	                	            
+    	            ToastService.criarToastMensagem("Usuário cadastrado.","toast-info","top right",3000);
     	            	
     	            vm.errorMessage = ''; 
     	            
@@ -135,65 +163,23 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
             console.log(vm.errorMessage);
         }
     }
-    this.getUsuarios = function getUsuarios(vm,mdDialog){
-        
-    	
-    	var dialog = mostrarDialog(mdDialog);
-    	
-    	return $http({
-          method: 'GET',
-          url: 'http://localhost:8080/listatarefas/rest/usuario/listarUsuarios'
-        })
-        .then(
-			function success(response){
-				vm.usuarios = angular.copy(response.data);
-				//aicionando um novoa tributo ao array de objetos do usuario
-				angular.forEach(vm.usuarios, function(usuario) {
-					usuario.preEditar = false;
-		        });
-				
-				console.log(vm.usuarios);
-			},
-			function error(response) {
-				if (response.status === 404 || response.status === -1){
-					vm.errorMessage = "Erro ao carregar a tabela de usuários , causa : " + response.data + ", status: " + response.status; 
-				} else {
-					vm.errorMessage = "Código do Status " +response.status;
-					console.log("Código do Status " +response.status );
-				}
-				vm.message = "";
-				vm.errorMessage = "Erro ao carregar os usuários, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
-			}
-	    ).finally(function () {
-	    	esconderDialog(mdDialog,dialog);
-	    	vm.carregando = false;
-	    });
-        
-        //return vm.usuarios;
-       
-    }
+   
   
     
-    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event,mdDialog,mdToast){
+    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event,mdToast){
     	
-    	// Appending dialog to document.body to cover sidenav in docs app
-        var confirm = mdDialog.confirm()
-              .title('Deseja Excluir o usuário?')
-              .textContent('Excluir o(a) ' + vm.usuarios[index].nome + "?")
-              .ariaLabel('Lucky day')
-              .targetEvent(event)
-              .ok('Confimar')
-              .cancel('Cancelar');
-        
-	      mdDialog.show(confirm).then(function() {
-            //$scope.status = 'You decided to get rid of your debt.';
-	    	  excluirUsuario(vm,index,mdToast);
-          }, function() {
-            //$scope.status = 'You decided to keep your debt.';
-          });
+    	var confirm = DialogService.mostrarDialogConfirm("Deseja Excluir o usuário?","Excluir o(a) " + vm.usuarios[index].nome + "?","Confirmar","Cancelar");
+    	
+    	confirm.then(function() {           
+ 	    	  excluirUsuario(vm,index,mdToast);
+        }, function() {
+           console.log("Cancelado");
+        });
+    	
+    	
     }
 
-    function excluirUsuario(vm,index,mdToast){
+    function excluirUsuario(vm,index){
     	
     	$http({
             method: 'DELETE',    
@@ -208,8 +194,9 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
         .then(
 		    function success(response){	
 		    	vm.usuarios.splice(index,1);
-		    	//vm.message = "Usuário excluído.";
-		    	criarToastMensagem("Usuário excluído.",mdToast);
+		    		    
+		    	ToastService.criarToastMensagem("Usuário excluído.","toast-info","top right",3000);
+		    	
 		    	vm.errorMessage = "";
 			},
 			function error(response) {
@@ -226,51 +213,6 @@ app.service('UsuarioService',['$http','$httpParamSerializer', function ($http,$h
     
     	
     }
-    
-    function mostrarDialog(mdDialog){
-    	/* 
-    	var alert = mdDialog.alert()
-        			.parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('This is an alert title')
-        .textContent('You can specify some description text in here.')
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Got it!')
-        //.targetEvent(event)
-        */
-    	var alert; 
-    	mdDialog.show(
-    			alert =	mdDialog.alert()
-				        .parent(angular.element(document.querySelector('#popupContainer')))
-				        .clickOutsideToClose(false)
-				        .title('Carregando...')
-				        //.textContent('You can specify some description text in here.')
-				        .ariaLabel('Alert Dialog Demo')
-		        //.ok('Got it!')
-        //.targetEvent(ev)
-      );
-    	
-    	return alert;
-    }
-    
-    function esconderDialog(mdDialog,dialog){
-    	
-    	mdDialog.hide(dialog, "new foobar!");
-    }
-    
-    
-    function criarToastMensagem(mensagem,mdToast){
-    	mdToast.show(
-    	   mdToast.simple()
-    	        .textContent(mensagem)
-    	        .toastClass("toast-info")
-    	        .position("top right")
-    	        .hideDelay(3000))
-    	   .then(function() {
-    	        console.log('Toast dismissed.');
-    	   }).catch(function() {
-    		   console.log('Toast failed or was forced to close early by another toast.');
-    	});
-    }
 
-}]);
+
+}

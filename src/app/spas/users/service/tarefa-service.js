@@ -1,22 +1,25 @@
 
-//var TarefaService = angular.module('TarefaService', [])
+angular.module('TarefaService', []).service('TarefaService', TarefaService);
 
-angular.module('TarefaService', []).service('TarefaService',['$http', function ($http) {
-	  
+TarefaService.$inject = ['$http','$httpParamSerializer','DialogService'];
+
+function TarefaService($http, $httpParamSerializer, DialogService) {
+	 
 	   this.getTarefas = function getTarefas(vm){
-	        return $http({
+	       
+		   DialogService.mostrarDialog();
+		   
+		   return $http({
 	          method: 'GET',
 	          url: 'http://localhost:8080/listatarefas/rest/tarefa/listarTarefas'
 	        })	        
 	        .then(
 				function success(response){
 					vm.tarefas = angular.copy(response.data);
-					//aicionando um novo atributo ao array de tarefas da tarefa
+					//adicionando um novo atributo ao model 'tarefa' em todo o array de tarefas
 					angular.forEach(vm.tarefas, function(tarefa) {
 						tarefa.preEditar = false;
-			        });
-					
-					console.log(vm.tarefas);
+			        });					
 				},
 				function error(response) {
 					if (response.status === 404 || response.status === -1){
@@ -29,7 +32,7 @@ angular.module('TarefaService', []).service('TarefaService',['$http', function (
 					vm.errorMessage = "Erro ao carregar as tarefas, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
 				}
 		    ).finally(function () {
-		    	 vm.carregando = false;
+		    	DialogService.esconderDialog();
 		    });
 	        
 	  }
@@ -135,9 +138,7 @@ angular.module('TarefaService', []).service('TarefaService',['$http', function (
 	        //guarda uma cópia do usuario antes de sua edição, para poder cancelar
 	        vm.tarefasOriginal[index] = angular.copy(vm.tarefas[index]);
 	        
-	        //limpa o formulario (como se fosse em java: setTarefa(new Tarefa()))
-	        //vm.tarefa = {};
-		   
+	       
 	   }
 	   
 	   this.cancelarEditarTarefa = function cancelarEditarTarefa(tarefa,vm,index) {
@@ -147,10 +148,8 @@ angular.module('TarefaService', []).service('TarefaService',['$http', function (
 		    tarefa.preEditar = false;
 	        vm.tarefas[index] = tarefa;
 
-	        //vm.tarefa = {};
-
 	    }
-	   
+	 
 	   function criarToastMensagem(mensagem,mdToast){
 	    	mdToast.show(
 	    	   mdToast.simple()
@@ -164,4 +163,4 @@ angular.module('TarefaService', []).service('TarefaService',['$http', function (
 	    		   console.log('Toast failed or was forced to close early by another toast.');
 	    	});
 	    }
-}]);
+}
