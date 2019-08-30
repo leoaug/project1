@@ -148,18 +148,56 @@ function TarefaService($http, $httpParamSerializer, DialogService, ToastService)
 	        vm.tarefas[index] = tarefa;
 
 	    }
-	 
-	   function criarToastMensagem(mensagem,mdToast){
-	    	mdToast.show(
-	    	   mdToast.simple()
-	    	        .textContent(mensagem)
-	    	        .toastClass("toast-info")
-	    	        .position("top right")
-	    	        .hideDelay(3000))
-	    	   .then(function() {
-	    	        console.log('Toast dismissed.');
-	    	   }).catch(function() {
-	    		   console.log('Toast failed or was forced to close early by another toast.');
-	    	});
+	   
+	   
+	   
+	   this.confirmarExcluirTarefa = function confirmarExcluirTarefa(vm,index){
+	    	
+	    	var confirm = DialogService.
+	    					mostrarDialogConfirm("Deseja Excluir o tarefa?","Excluir o(a) " + vm.tarefas[index].nome + "?","Confirmar","Cancelar");
+	    	
+	    	confirm.then(function() {           
+	 	    	  excluirTarefa(vm,index);
+	        }, function() {
+	           console.log("Cancelado");
+	        });
+	    	  	
 	    }
+
+	    function excluirTarefa(vm,index){
+	    	
+	    	$http({
+	            method: 'DELETE',    
+	            headers: {
+	            	'Content-Type': 'application/json'
+	            },
+	            url: 'http://localhost:8080/listatarefas/rest/tarefa/excluirTarefa',
+	            params:  {
+	                id: vm.tarefas[index].id
+	            }
+	        })          
+	        .then(
+			    function success(response){	
+			    	vm.tarefas.splice(index,1);
+			    		    
+			    	ToastService.criarToastMensagem("Tarefa excluído.","toast-info","top right",3000);
+			    	
+			    	vm.errorMessage = "";
+				},
+				function error(response) {
+					if (response.status === 404){
+						console.log("Endpoint Fora "+ response.data);
+					} else {
+						vm.errorMessage = "Código do Status " +response.status;
+						console.log("Código do Status " +response.status );
+					}
+					vm.message = "";
+					vm.errorMessage = "Erro ao excluir a tarefa, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
+				}
+	        );
+	    
+	    	
+	    }
+	   
+	   
 }

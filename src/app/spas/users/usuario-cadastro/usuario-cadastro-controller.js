@@ -84,9 +84,9 @@
 	
 	    }
 	    
-	    function confirmarExcluirUsuario(index,event) {
+	    function confirmarExcluirUsuario(index) {
 	    	
-	    	UsuarioService.confirmarExcluirUsuario(vm,index,event);
+	    	UsuarioService.confirmarExcluirUsuario(vm,index);
 	   	
 	    }
 	

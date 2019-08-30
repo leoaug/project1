@@ -164,7 +164,7 @@ function UsuarioService($http, $httpParamSerializer, DialogService, ToastService
    
   
     
-    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event){
+    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index){
     	
     	var confirm = DialogService.
     					mostrarDialogConfirm("Deseja Excluir o usuário?","Excluir o(a) " + vm.usuarios[index].nome + "?","Confirmar","Cancelar");

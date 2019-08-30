@@ -2,8 +2,6 @@
     
   
     
-   
-	
 		<md-button ng-click="vm.redirect('/')" class="md-fab md-mini md-primary" aria-label="Voltar">
 	  			<md-icon md-svg-icon="app/spas/users/img/back.svg"></md-icon>
 	  			<md-tooltip md-direction="bottom">Voltar</md-tooltip>
@@ -199,7 +197,7 @@
 			           </div> 
 			           <div ng-if="tarefa.preEditar == false" style=" display: inline-block;"> 
 			           		<div>
-					             <div ng-click="vm.confirmarExcluirTarefa($index,$event)" >
+					             <div ng-click="vm.confirmarExcluirTarefa($index)" >
 					            	<md-button class="md-fab md-mini md-primary"  aria-label="Excluir">
 					            		<md-icon md-svg-icon="app/spas/users/img/delete.svg"></md-icon>
 					            		<md-tooltip md-direction="bottom">Excluir</md-tooltip> 

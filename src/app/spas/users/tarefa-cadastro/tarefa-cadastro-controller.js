@@ -1,5 +1,4 @@
-(function(angular) {
-	'use strict';
+
 
 	angular.module('app')
 			.controller('TarefaCadastroCtrl', TarefaCadastroCtrl);
@@ -27,12 +26,12 @@
 		vm.setUsuarioTarefa = setUsuarioTarefa;
 		vm.editarTarefa = editarTarefa;
 		vm.cancelarEditarTarefa = cancelarEditarTarefa;
+		vm.confirmarExcluirTarefa = confirmarExcluirTarefa;
 
 // =========== extende metodos que sao usados em ql controller =====================================
 		
 		angular.extend(vm, RedirectService);
 		 		
-
 
 // ================= Carregando o bb-dropdown de usuários e tarefas para o table de tarefas (usando promises (then) para chamadas no servidor) ===================   		
 		
@@ -82,7 +81,12 @@
 	    	
 	    }
 	    
+	    function confirmarExcluirTarefa(index) {
+	    	
+	    	TarefaService.confirmarExcluirTarefa(vm,index);
+	   	
+	    }
+	    
 		
 	}
 
-})(angular);
