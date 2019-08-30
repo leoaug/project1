@@ -3,12 +3,10 @@ angular.module('UsuarioService', []).service('UsuarioService', UsuarioService);
 
 UsuarioService.$inject = ['$http','$httpParamSerializer', 'DialogService','ToastService'];
 
-function UsuarioService($http, $httpParamSerializer, DialogService,ToastService) {
+function UsuarioService($http, $httpParamSerializer, DialogService, ToastService) {
 	
 	this.getUsuarios = function getUsuarios(vm){
 	    
-		DialogService.mostrarDialog();
-    	
     	return $http({
           method: 'GET',
           url: 'http://localhost:8080/listatarefas/rest/usuario/listarUsuarios'
@@ -33,7 +31,7 @@ function UsuarioService($http, $httpParamSerializer, DialogService,ToastService)
 				vm.errorMessage = "Erro ao carregar os usuários, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
 			}
 	    ).finally(function () {
-	    	DialogService.esconderDialog();
+	    	console.log("getUsuarios()");
 	    });
 	        
 	       
@@ -166,17 +164,17 @@ function UsuarioService($http, $httpParamSerializer, DialogService,ToastService)
    
   
     
-    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event,mdToast){
+    this.confirmarExcluirUsuario = function confirmarExcluirUsuario(vm,index,event){
     	
-    	var confirm = DialogService.mostrarDialogConfirm("Deseja Excluir o usuário?","Excluir o(a) " + vm.usuarios[index].nome + "?","Confirmar","Cancelar");
+    	var confirm = DialogService.
+    					mostrarDialogConfirm("Deseja Excluir o usuário?","Excluir o(a) " + vm.usuarios[index].nome + "?","Confirmar","Cancelar");
     	
     	confirm.then(function() {           
- 	    	  excluirUsuario(vm,index,mdToast);
+ 	    	  excluirUsuario(vm,index);
         }, function() {
            console.log("Cancelado");
         });
-    	
-    	
+    	  	
     }
 
     function excluirUsuario(vm,index){

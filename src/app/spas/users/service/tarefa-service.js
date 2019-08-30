@@ -1,14 +1,12 @@
 
 angular.module('TarefaService', []).service('TarefaService', TarefaService);
 
-TarefaService.$inject = ['$http','$httpParamSerializer','DialogService'];
+TarefaService.$inject = ['$http','$httpParamSerializer','DialogService','ToastService'];
 
-function TarefaService($http, $httpParamSerializer, DialogService) {
+function TarefaService($http, $httpParamSerializer, DialogService, ToastService) {
 	 
 	   this.getTarefas = function getTarefas(vm){
-	       
-		   DialogService.mostrarDialog();
-		   
+	      
 		   return $http({
 	          method: 'GET',
 	          url: 'http://localhost:8080/listatarefas/rest/tarefa/listarTarefas'
@@ -19,7 +17,8 @@ function TarefaService($http, $httpParamSerializer, DialogService) {
 					//adicionando um novo atributo ao model 'tarefa' em todo o array de tarefas
 					angular.forEach(vm.tarefas, function(tarefa) {
 						tarefa.preEditar = false;
-			        });					
+			        });	
+					
 				},
 				function error(response) {
 					if (response.status === 404 || response.status === -1){
@@ -32,7 +31,7 @@ function TarefaService($http, $httpParamSerializer, DialogService) {
 					vm.errorMessage = "Erro ao carregar as tarefas, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
 				}
 		    ).finally(function () {
-		    	DialogService.esconderDialog();
+		    	console.log("getTarefas()");
 		    });
 	        
 	  }
@@ -69,7 +68,7 @@ function TarefaService($http, $httpParamSerializer, DialogService) {
 	    	
 	   }
 	  
-	   this.adicionarTarefa = function adicionarTarefa (tarefaTela,vm,mdToast) {
+	   this.adicionarTarefa = function adicionarTarefa (tarefaTela,vm) {
 		
 		   
 		   if (tarefaTela != null && tarefaTela.nome && tarefaTela.usuario && tarefaTela.dataInicio && tarefaTela.dataFim && tarefaTela.statusTarefaEnum) {    
@@ -100,9 +99,9 @@ function TarefaService($http, $httpParamSerializer, DialogService) {
 	    	            vm.tarefa = {}; 
 	    	            
 	    	            vm.tarefa.statusTarefaEnum = "ATIVA";
-	    	          	    	            
-	    	            criarToastMensagem("Tarefa cadastrado.",mdToast);
-	    	            	    	            	
+	    	          	    
+	    	            ToastService.criarToastMensagem("Tarefa cadastrado.","toast-info","top right",3000);
+	    	            	    	            	    	            	
 	    	            vm.errorMessage = ''; 
 	    	            
 	    			},

@@ -4,9 +4,9 @@
 	angular.module('app')
 			.controller('TarefaCadastroCtrl', TarefaCadastroCtrl);
 
-	TarefaCadastroCtrl.$inject = [ '$scope','$location', '$mdToast','$controller' , 'TarefaService', 'UsuarioService','RedirectService'];
+	TarefaCadastroCtrl.$inject = [ '$scope','$location', 'DialogService','$controller' , 'TarefaService', 'UsuarioService','RedirectService'];
 
-	function TarefaCadastroCtrl($scope, $location , $mdToast, $controller , TarefaService , UsuarioService, RedirectService) {
+	function TarefaCadastroCtrl($scope, $location , DialogService, $controller , TarefaService , UsuarioService, RedirectService) {
 
 		var vm = this;
 			
@@ -32,15 +32,22 @@
 		
 		angular.extend(vm, RedirectService);
 		 		
-// ================= Carregando o bb-dropdown de usuários ===================   
-	    
-		UsuarioService.getUsuarios(vm);
 
-	    
-// ================= Carregando tarefas para o table de tarefas ============	    
 
-	    TarefaService.getTarefas(vm);
-
+// ================= Carregando o bb-dropdown de usuários e tarefas para o table de tarefas (usando promises (then) para chamadas no servidor) ===================   		
+		
+		DialogService.mostrarDialog();
+		
+		UsuarioService.getUsuarios(vm).then(
+			 function success(response){	 
+				 TarefaService.getTarefas(vm).then(
+						 function success(response){
+							 DialogService.esconderDialog();
+						 }
+				 );					 
+			 }
+		);
+		
 // ================ Funcções da controler ==================================
 	    
 	 
@@ -59,7 +66,7 @@
 	    
 	    function adicionarTarefa(tarefa){
 	    	
-	    	TarefaService.adicionarTarefa(tarefa,vm,$mdToast);	    	
+	    	TarefaService.adicionarTarefa(tarefa,vm);	    	
 	    
 	    }
 	    

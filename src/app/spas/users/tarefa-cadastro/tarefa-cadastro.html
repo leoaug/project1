@@ -1,7 +1,6 @@
 <div>
     
   
-	<div class="container">  
     
    
 	
@@ -12,42 +11,47 @@
 		
 		<br/>
 		<br/>
-			
-	
-		<div layout="column" ng-cloak class="md-inline-form">
 		
-		  <md-content layout-padding>
-		    <div>
+		
+		  <md-content layout-padding ng-cloak>
 		      <form name="tarefaForm">
 		
+		        <!-- Inicio Row -->
 		        <div layout-gt-xs="row">
-		          <md-input-container class="md-block" flex-gt-sm>
-		             <label>Nome</label>
-					 <input ng-model="vm.tarefa.nome" />
-		          </md-input-container>
-		
-				  <div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)" class="md-block" flex-gt-sm>
-					    <a href id="simple-dropdown" bb-dropdown-toggle class="md-block" flex-gt-sm>
-					        Selecione o Usuário:
-					    </a>
-					    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
-					        <li role="menuitem" ng-repeat="usuario in vm.usuarios" >
-					            <a ng-click="vm.setUsuario(usuario)" style="text-decoration:none" >{{ usuario.nome }}</a>
-					        </li>
-					    </ul>
-				  </div>
-		
-		          <md-input-container >
-			            <label>Data Início</label>
-			            <md-datepicker ng-model="vm.tarefa.dataInicio"  aria-label="Data Início" ></md-datepicker>
-		          </md-input-container>
+			          <md-input-container class="md-block" flex-gt-sm>
+			             <label>Nome</label>
+						 <input ng-model="vm.tarefa.nome" />
+			          </md-input-container>
+			
+					  <div flex-gt-sm>	
+						  <div bb-dropdown bb-no-arrow="true" bb-on-toggle="vm.toggled(open)">
+							    <a href id="simple-dropdown" bb-dropdown-toggle>
+							        Selecione o Usuário:
+							    </a>
+							    <ul bb-dropdown-menu aria-labelledby="simple-dropdown">
+							        <li role="menuitem" ng-repeat="usuario in vm.usuarios" >
+							            <a ng-click="vm.setUsuario(usuario)" style="text-decoration:none" >{{ usuario.nome }}</a>
+							        </li>
+							    </ul>
+						  </div>
+					  </div>
+					  
+					
+			          <md-input-container >
+				            <label>Data Início</label>
+				            <md-datepicker ng-model="vm.tarefa.dataInicio" aria-label="Data Início" ></md-datepicker>
+			          </md-input-container>
+		       
 		          
-		          <md-input-container >
-			            <label>Data Fim</label>
-			            <md-datepicker ng-model="vm.tarefa.dataFim"  aria-label="Data Fim"></md-datepicker>
-		          </md-input-container>
 		          
-		        </div>
+			          <md-input-container>
+				            <label>Data Fim</label>
+				            <md-datepicker ng-model="vm.tarefa.dataFim"  aria-label="Data Fim"></md-datepicker>
+			          </md-input-container>
+				       	          
+		       	</div>
+		        
+		        <!-- Inicio Row -->
 		        <div layout-gt-xs="row">
 		        	<md-radio-group ng-model="vm.tarefa.statusTarefaEnum">
 	
@@ -65,10 +69,9 @@
 	    		 <md-button ng-click="vm.adicionarTarefa(vm.tarefa)" class="md-raised md-primary">Adicionar Tarefa</md-button>
 	    		
 		      </form>
-		    </div>
+		   
 		  </md-content>
 		
-		</div>
 	
 		<br/>
 		
@@ -210,10 +213,8 @@
 		    	
 		    </tr>
 		       
+		  </table>
 		       
-		       
-		</div>   
- 
-	 
+	
 	
 </div>
