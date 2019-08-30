@@ -2,10 +2,10 @@
 
 	angular.module('app').controller('UsuarioCadastroCtrl', UsuarioCadastroCtrl);
 	
-	UsuarioCadastroCtrl.$inject = ['$scope','$location','UsuarioService','RedirectService'];
+	UsuarioCadastroCtrl.$inject = ['$scope','$location','UsuarioService','RedirectService','DialogService'];
 	
 	
-	function UsuarioCadastroCtrl($scope, $location, UsuarioService ,RedirectService ) {
+	function UsuarioCadastroCtrl($scope, $location, UsuarioService ,RedirectService ,DialogService) {
 	    
 	    var vm = this;
 	  
@@ -24,9 +24,15 @@
 	    vm.message = "";
 	    vm.usuariosOriginal = [];
 	    
-	// ================= Carregando a table de usuários ===================   
+	// ================= Carregando a table de usuários (usando promises sempre que tiver chamada ao servidor) ===================   
 	    
-	    UsuarioService.getUsuarios(vm);
+	    DialogService.mostrarDialog();
+	    
+	    UsuarioService.getUsuarios(vm).then(
+    		function success(response) {
+    			DialogService.esconderDialog();
+    		}
+	    );
 	    
 	//=================== funcoes da controller ==========================================
 	    

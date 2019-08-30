@@ -4,9 +4,9 @@
 	angular.module('app')
 			.controller('TarefaCadastroCtrl', TarefaCadastroCtrl);
 
-	TarefaCadastroCtrl.$inject = [ '$scope','$location', 'DialogService','$controller' , 'TarefaService', 'UsuarioService','RedirectService'];
+	TarefaCadastroCtrl.$inject = [ '$scope','$location','$controller' , 'TarefaService', 'UsuarioService','RedirectService', 'DialogService'];
 
-	function TarefaCadastroCtrl($scope, $location , DialogService, $controller , TarefaService , UsuarioService, RedirectService) {
+	function TarefaCadastroCtrl($scope, $location , $controller , TarefaService , UsuarioService, RedirectService , DialogService) {
 
 		var vm = this;
 			
@@ -28,7 +28,7 @@
 		vm.editarTarefa = editarTarefa;
 		vm.cancelarEditarTarefa = cancelarEditarTarefa;
 
-// =========== extende metodos que sao usados em ql controller =============
+// =========== extende metodos que sao usados em ql controller =====================================
 		
 		angular.extend(vm, RedirectService);
 		 		
@@ -41,14 +41,14 @@
 		UsuarioService.getUsuarios(vm).then(
 			 function success(response){	 
 				 TarefaService.getTarefas(vm).then(
-						 function success(response){
-							 DialogService.esconderDialog();
-						 }
+					 function success(response){
+						 DialogService.esconderDialog();
+					 }
 				 );					 
 			 }
 		);
 		
-// ================ Funcções da controler ==================================
+// ================ Funcções da controler ============================================================
 	    
 	 
 	    
