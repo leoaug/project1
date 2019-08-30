@@ -14,7 +14,7 @@ function UsuarioService($http, $httpParamSerializer, DialogService, ToastService
         .then(
 			function success(response){
 				vm.usuarios = angular.copy(response.data);
-				//aicionando um novoa tributo ao array de objetos do usuario
+				//aicionando um novo atributo ao array de objetos do usuario
 				angular.forEach(vm.usuarios, function(usuario) {
 					usuario.preEditar = false;
 		        });
@@ -95,9 +95,7 @@ function UsuarioService($http, $httpParamSerializer, DialogService, ToastService
   				
   			}
        );
-    	
-
-        return usuarioTela;
+    
     }
 
     

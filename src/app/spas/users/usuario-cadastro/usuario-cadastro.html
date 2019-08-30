@@ -1,16 +1,15 @@
 <div>
     
-  
+  		<div ng-include src="'app/spas/users/user-template.html'"></div>
+		
 		
 		<md-button ng-click="vm.redirect('/')" class="md-fab md-mini md-primary" aria-label="Voltar">
       			<md-icon md-svg-icon="app/spas/users/img/back.svg"></md-icon>
       			<md-tooltip md-direction="bottom">Voltar</md-tooltip>
 		</md-button> 
+		<br/> 
 		
-		<br/>
-		<br/>
-	  
-	
+		
 	   
 	    <md-input-container>
 	         <label>Nome</label>
@@ -27,12 +26,10 @@
 		        </li>
 		    </ul>
 		 </div>
-    
-
-	
-     <br /> 
+   
+     	<br /> 
      
-      <md-button ng-click="vm.adicionarUsuario(vm.usuario)" rounded="true"  class="md-raised md-primary">Adicionar Usuário</md-button>
+       <md-button ng-click="vm.adicionarUsuario(vm.usuario)" rounded="true"  class="md-raised md-primary">Adicionar Usuário</md-button>
    
    
 		<br/>

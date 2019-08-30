@@ -92,9 +92,7 @@ function TarefaService($http, $httpParamSerializer, DialogService, ToastService)
 	    		    	
 	    		    	tarefaTela.id = JSON.stringify(response.data.id);
 	    	           
-	    	            vm.tarefas.push(tarefaTela);   	           
-	    	            
-	    	            console.log(vm.tarefas);
+	    	            vm.tarefas.push(tarefaTela);   	           	    	       
 	    	            
 	    	            vm.tarefa = {}; 
 	    	            
@@ -139,6 +137,55 @@ function TarefaService($http, $httpParamSerializer, DialogService, ToastService)
 	        
 	       
 	   }
+	   
+	   this.confirmarEditarTarefa = function confirmarEditarTarefa(tarefa,vm,index){
+	    	
+	    	//deletar esse atributo do tarefa, pois ele não existe no json do backEnd , e da erro 400
+	    	delete tarefa.preEditar;   	
+	    	delete tarefa.usuario.preEditar;   
+	    	
+	    	$http({
+	            method: 'PUT',            
+	            headers: {
+	            	'Content-Type': 'application/json'
+	            },            
+	            url: 'http://localhost:8080/listatarefas/rest/tarefa/alterarTarefa',
+	            data: JSON.parse(JSON.stringify(tarefa))
+	        })          
+	        .then(
+	    		function success(response){
+			    	//altera o campo preEditar do user para false para que apareça readonly dos campos
+	    			tarefa.preEditar = false;
+			        
+			        vm.tarefas[index] = tarefa;
+			        vm.tarefasOriginal[index] = angular.copy(vm.tarefas[index]);
+			        vm.tarefa = {}; 
+			        
+			        vm.tarefa.statusTarefaEnum = "ATIVA";
+			        
+			        ToastService.criarToastMensagem("Tarefa editada.","toast-info","top right",3000);
+			        
+			        //vm.message = "Usuário editado."
+	  	            vm.errorMessage = ''; 
+	  	            
+	  	            
+	  	            
+	  			},
+	  			function error(response) {
+	  				if (response.status === 404){
+	  					console.log("Endpoint Fora ");
+	  				} else {
+	  					vm.errorMessage = "Código do Status " +response.status;
+	  					console.log("Código do Status " +response.status );
+	  				}
+	  				
+	  				vm.message = "";
+					vm.errorMessage = "Erro ao confirmar a edição da tarefa, causa: " + JSON.parse(JSON.stringify(response.data)) + " Código do Status " +response.status;
+	  				
+	  			}
+	       );
+	    
+	    }
 	   
 	   this.cancelarEditarTarefa = function cancelarEditarTarefa(tarefa,vm,index) {
 

@@ -1,14 +1,13 @@
 <div>
     
-  
+  		<div ng-include src="'app/spas/users/user-template.html'"></div>
     
+    	
 		<md-button ng-click="vm.redirect('/')" class="md-fab md-mini md-primary" aria-label="Voltar">
 	  			<md-icon md-svg-icon="app/spas/users/img/back.svg"></md-icon>
 	  			<md-tooltip md-direction="bottom">Voltar</md-tooltip>
 		</md-button> 
 		
-		<br/>
-		<br/>
 		
 		
 		  <md-content layout-padding ng-cloak>
@@ -181,7 +180,7 @@
 				       </div>   
 				       <div ng-if="tarefa.preEditar == true"  style=" display: inline-block;">	
 				       		<div> 
-					            <md-button ng-click="vm.confirmarEditar(tarefa,$index)" class="md-fab md-mini md-primary" aria-label="Confirmar">
+					            <md-button ng-click="vm.confirmarEditarTarefa(tarefa,$index)" class="md-fab md-mini md-primary" aria-label="Confirmar">
 			            			<md-icon md-svg-icon="app/spas/users/img/confirm.svg"></md-icon>
 			            			<md-tooltip md-direction="bottom">Confirmar</md-tooltip>
 			        			</md-button> 

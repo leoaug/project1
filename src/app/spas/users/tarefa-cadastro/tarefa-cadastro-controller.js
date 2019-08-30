@@ -27,6 +27,7 @@
 		vm.editarTarefa = editarTarefa;
 		vm.cancelarEditarTarefa = cancelarEditarTarefa;
 		vm.confirmarExcluirTarefa = confirmarExcluirTarefa;
+		vm.confirmarEditarTarefa = confirmarEditarTarefa;
 
 // =========== extende metodos que sao usados em ql controller =====================================
 		
@@ -73,6 +74,12 @@
 	    	
 	    	TarefaService.editarTarefa(tarefa,vm,index);
 	    	
+	    }
+	    
+	   function confirmarEditarTarefa (tarefa,index) {
+		       
+		   TarefaService.confirmarEditarTarefa(tarefa,vm,index);
+	    
 	    }
 	    
 	    function cancelarEditarTarefa(tarefa,index){
